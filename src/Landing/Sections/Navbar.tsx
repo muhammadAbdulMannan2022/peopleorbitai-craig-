@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link, useLocation } from "react-router"; // react-router
 import { FaX } from "react-icons/fa6";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -129,7 +129,7 @@ const Navbar = () => {
   return (
     <>
       {/* ========================== NAVBAR ========================== */}
-      <nav className="pt-4 px-3">
+      <nav className="pt-4 px-3 sticky top-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white shadow-xl rounded-full border border-[#E7E7F0]">
           <div className="flex justify-between items-center h-16">
             {/* LOGO */}
