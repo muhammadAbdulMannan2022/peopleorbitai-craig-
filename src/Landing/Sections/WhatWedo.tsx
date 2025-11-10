@@ -16,24 +16,29 @@ export default function WhatWedo() {
           </p>
         </div>
         <div className="flex flex-col md:flex-row gap-5 md:8">
-          <div className="relative border-8 border-[#f7f7fa] overflow-hidden  rounded-tl-4xl">
-            <div className="relative z-10">
-              <div className="absolute w-20 h-20 -top-4 -right-4 md:hidden flex items-center justify-center rounded-full border-8 border-[#f7f7fa] bg-white">
-                <div className="bg-radial from-[#EFF0FD] to-main/10 w-full h-full rounded-full flex items-center justify-center">
-                  <img
-                    src="/logosm.svg"
-                    className="aspect-square w-18 h-18"
-                    alt=""
-                  />
+          <div className="flex flex-col items-center">
+            <h1 className="text-title-2nd font-bold text-2xl md:text-2xl mb-5 md:mb-2 ">
+              Helper AI Talent Acquisition
+            </h1>
+            <div className="relative border-8 border-[#f7f7fa]  rounded-tl-4xl">
+              <div className="relative z-10">
+                <div className="absolute shadow w-20 h-20 -top-4 -right-4 md:hidden flex items-center justify-center rounded-full border-8 border-[#f7f7fa] bg-white">
+                  <div className="bg-radial from-[#EFF0FD] to-main/10 w-full h-full rounded-full flex items-center justify-center">
+                    <img
+                      src="/logosm.svg"
+                      className="aspect-square w-18 h-18"
+                      alt=""
+                    />
+                  </div>
                 </div>
               </div>
+              <img src="/WhatDoR.jpg" className="rounded-tl-4xl" alt="" />
+              <div className="w-full h-full bg-blue-600/10 absolute top-0 rounded-tl-4xl"></div>
+              <div className="w-full h-[15%] bg-linear-to-b z-1 from-transparent via-[#f7f7fa] to-[#f7f7fa]  absolute -bottom-2 "></div>
             </div>
-            <img src="/WhatDoR.jpg" className="" alt="" />
-            <div className="w-full h-full bg-blue-600/10 absolute top-0 "></div>
-            <div className="w-full h-[15%] bg-linear-to-b z-1 from-transparent via-[#f7f7fa] to-[#f7f7fa]  absolute -bottom-2"></div>
           </div>
           <div className="relative z-10">
-            <div className="absolute w-30 h-30 -top-10 -left-15 hidden md:flex items-center justify-center rounded-full border-8 border-[#f7f7fa] bg-white">
+            <div className="absolute w-30 h-30 -top-3 -left-15 hidden md:flex items-center justify-center rounded-full border-8 border-[#f7f7fa] bg-white">
               <div className="bg-radial from-[#EFF0FD] to-main/10 w-full h-full rounded-full flex items-center justify-center">
                 <img
                   src="/logosm.svg"
@@ -43,21 +48,26 @@ export default function WhatWedo() {
               </div>
             </div>
           </div>
-          <div className="relative border-8 border-[#f7f7fa] overflow-hidden  rounded-tr-4xl">
-            <div className="relative z-10">
-              <div className="absolute w-20 h-20 -top-4 -left-4 md:hidden flex items-center justify-center rounded-full border-8 border-[#f7f7fa] bg-white">
-                <div className="bg-radial from-[#EFF0FD] to-main/10 w-full h-full rounded-full flex items-center justify-center">
-                  <img
-                    src="/logosm.svg"
-                    className="aspect-square w-18 h-18"
-                    alt=""
-                  />
+          <div className="flex flex-col items-center">
+            <h1 className="text-title-2nd font-bold text-2xl md:text-2xl mb-5 md:mb-2 ">
+              Learning and Development of HR{" "}
+            </h1>
+            <div className="relative border-8 border-[#f7f7fa] rounded-tr-4xl">
+              <div className="relative z-10">
+                <div className="absolute shadow w-20 h-20 -top-4 -left-4 md:hidden flex items-center justify-center rounded-full border-8 border-[#f7f7fa] bg-white">
+                  <div className="bg-radial from-[#EFF0FD] to-main/10 w-full h-full rounded-full flex items-center justify-center">
+                    <img
+                      src="/logosm.svg"
+                      className="aspect-square w-18 h-18"
+                      alt=""
+                    />
+                  </div>
                 </div>
               </div>
+              <img src="WhatDoL.jpg" className="rounded-tr-4xl" alt="" />
+              <div className="w-full h-full bg-blue-600/10 absolute top-0 rounded-tr-4xl"></div>
+              <div className="w-full h-[15%] bg-linear-to-b z-1 from-transparent via-[#f7f7fa] to-[#f7f7fa]  absolute -bottom-2"></div>
             </div>
-            <img src="WhatDoL.jpg" className="" alt="" />
-            <div className="w-full h-full bg-blue-600/10 absolute top-0 "></div>
-            <div className="w-full h-[15%] bg-linear-to-b z-1 from-transparent via-[#f7f7fa] to-[#f7f7fa]  absolute -bottom-2"></div>
           </div>
         </div>
       </div>
