@@ -8,7 +8,7 @@ export default function Hero() {
       <Navbar />
 
       {/* ----- The rest of the screen ----- */}
-      <div className="flex-1 flex items-center justify-center">
+      <div className="flex-1 flex items-center justify-center overflow-x-hidden">
         <div className="max-w-7xl w-full flex flex-col-reverse md:flex-row justify-start  md:justify-between gap-8 px-5 md:px-0 py-8 md:py-10 h-full ">
           {/* ----- Left column (text + CTA) ----- */}
           <div className="flex flex-col justify-center space-y-6  w-full md:w-1/2">
