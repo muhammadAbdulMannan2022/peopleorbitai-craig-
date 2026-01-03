@@ -1,5 +1,6 @@
 import { FeatureSection } from "./Sections/Features";
 import Hero from "./Sections/Hero";
+import { HowItWorks } from "./Sections/HowItWorks";
 import WhatWedo from "./Sections/WhatWedo";
 
 export default function Landing() {
@@ -8,6 +9,7 @@ export default function Landing() {
       <Hero />
       <WhatWedo />
       <FeatureSection />
+      <HowItWorks />
     </div>
   );
 }
