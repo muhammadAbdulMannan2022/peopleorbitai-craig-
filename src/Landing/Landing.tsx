@@ -2,6 +2,7 @@ import { FeatureSection } from "./Sections/Features";
 import Hero from "./Sections/Hero";
 import { HowItWorks } from "./Sections/HowItWorks";
 import WhatWedo from "./Sections/WhatWedo";
+import { WhyChooseUs } from "./Sections/WhyUs";
 
 export default function Landing() {
   return (
@@ -10,6 +11,7 @@ export default function Landing() {
       <WhatWedo />
       <FeatureSection />
       <HowItWorks />
+      <WhyChooseUs />
     </div>
   );
 }
