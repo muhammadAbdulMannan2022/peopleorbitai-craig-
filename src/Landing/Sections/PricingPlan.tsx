@@ -128,7 +128,7 @@ export const PricingPlans: React.FC = () => {
   ];
 
   return (
-    <section className="py-24 px-6 md:px-16 bg-[#fafafa]">
+    <section id="pricing" className="py-24 px-6 md:px-16 bg-[#fafafa]">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-20">
