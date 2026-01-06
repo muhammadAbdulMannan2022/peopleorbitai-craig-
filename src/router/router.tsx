@@ -1,6 +1,12 @@
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter, Navigate } from "react-router";
 import App from "../App";
 import Landing from "../Landing/Landing";
+import Layout from "../auth/Layout";
+import Login from "../auth/pages/Login";
+import Signup from "../auth/pages/Signup";
+import OTP from "../auth/pages/Otp";
+import ConfirmEmail from "../auth/pages/ConfirmEmail";
+import ChangePassword from "../auth/pages/ChangePassword";
 
 const router = createBrowserRouter([
   {
@@ -10,6 +16,36 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Landing />,
+      },
+      {
+        path: "/auth",
+        element: <Layout />,
+        children: [
+          {
+            index: true,
+            element: <Navigate to="/auth/login" replace />,
+          },
+          {
+            path: "login",
+            element: <Login />,
+          },
+          {
+            path: "signup",
+            element: <Signup />,
+          },
+          {
+            path: "otp",
+            element: <OTP />,
+          },
+          {
+            path: "confirm-email",
+            element: <ConfirmEmail />,
+          },
+          {
+            path: "change-password",
+            element: <ChangePassword />,
+          },
+        ],
       },
     ],
   },
