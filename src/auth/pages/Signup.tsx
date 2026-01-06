@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Mail, Lock, User, Eye, EyeOff } from "lucide-react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 export default function Signup() {
   const [name, setName] = useState("");
@@ -9,6 +9,7 @@ export default function Signup() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,13 +20,14 @@ export default function Signup() {
     }
 
     // handle signup logic here
+    navigate("/auth/otp", { state: { email, from: 'signup' } });
   };
 
   return (
     <div className="text-center">
         {/* Title */}
         <h1 className="text-4xl font-black text-[#2d3748] mb-8 md:mb-12 tracking-tight">
-          Create account
+          Create <span className="text-title-2nd">account</span>
         </h1>
 
         <form onSubmit={handleSubmit} className="text-left">
@@ -161,8 +163,8 @@ export default function Signup() {
               Already have an account?
             </span>
             <Link
-              to={"/auth/login"}
-              className="px-4 py-1.5 border border-authThem rounded-lg text-authThem text-[10px] md:text-xs font-bold hover:bg-authThem/5 transition-colors"
+              to="/auth/login"
+              className="px-4 py-1.5 border border-authThem rounded-lg text-authThem text-[10px] md:text-xs font-bold hover:bg-authThem/5 transition-colors hover:cursor-pointer"
             >
               Sign In
             </Link>

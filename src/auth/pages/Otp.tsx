@@ -1,12 +1,13 @@
-// @ts-nocheck
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 
 export default function OTP() {
   const [otp, setOtp] = useState<string[]>(["", "", "", ""]);
   const [error, setError] = useState("");
   const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
   const navigate = useNavigate();
+  const location = useLocation();
+  const email = location.state?.email || "your email";
 
   // Auto focus first input
   useEffect(() => {
@@ -63,7 +64,13 @@ export default function OTP() {
     const code = otp.join("");
     console.log("OTP:", code);
 
-    // navigate("/next-page");
+    // If we came from forgot password flow, go to change password
+    if (location.state?.from === 'forgot') {
+      navigate("/auth/change-password");
+    } else {
+      // Signup flow: go to login
+      navigate("/auth/login");
+    }
   };
 
   return (
@@ -73,7 +80,7 @@ export default function OTP() {
         Verify OTP
       </h1>
       <p className="text-slate-400 text-sm mb-12">
-        Enter the 4-digit code sent to your email
+        Enter the 4-digit code sent to <span className="text-authThem font-bold">{email}</span>
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-10">
@@ -82,7 +89,7 @@ export default function OTP() {
           {otp.map((digit, idx) => (
             <input
               key={idx}
-              ref={(el) => (inputsRef.current[idx] = el)}
+              ref={(el) => { inputsRef.current[idx] = el; }}
               type="text"
               inputMode="numeric"
               maxLength={1}

@@ -1,10 +1,14 @@
 import { useState } from "react";
-import { Lock } from "lucide-react";
+import { Lock, Eye, EyeOff } from "lucide-react";
+import { useNavigate } from "react-router";
 
 export default function ChangePassword() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,6 +26,7 @@ export default function ChangePassword() {
     setError("");
     console.log("New password:", password);
     // submit new password here
+    navigate("/auth/login");
   };
 
   return (
@@ -48,16 +53,23 @@ export default function ChangePassword() {
                 <Lock size={20} />
               </div>
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 placeholder="New password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-14 pr-6 py-4 rounded-xl border border-authThem/50
+                className="w-full pl-14 pr-14 py-4 rounded-xl border border-authThem/50
                 shadow-sm focus:border-authThem focus:ring-4 focus:ring-authThem/10
                 outline-none transition-all placeholder:text-slate-300
                 text-slate-600 font-medium"
                 required
               />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-authThem transition-colors hover:cursor-pointer"
+              >
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </button>
             </div>
           </div>
 
@@ -71,16 +83,23 @@ export default function ChangePassword() {
                 <Lock size={20} />
               </div>
               <input
-                type="password"
+                type={showConfirmPassword ? "text" : "password"}
                 placeholder="Confirm password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full pl-14 pr-6 py-4 rounded-xl border border-authThem/50
+                className="w-full pl-14 pr-14 py-4 rounded-xl border border-authThem/50
                 shadow-sm focus:border-authThem focus:ring-4 focus:ring-authThem/10
                 outline-none transition-all placeholder:text-slate-300
                 text-slate-600 font-medium"
                 required
               />
+              <button
+                type="button"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-authThem transition-colors hover:cursor-pointer"
+              >
+                {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </button>
             </div>
           </div>
 

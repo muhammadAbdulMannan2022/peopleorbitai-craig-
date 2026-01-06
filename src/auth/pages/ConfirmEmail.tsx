@@ -1,13 +1,16 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import { Mail } from "lucide-react";
 
 export default function ConfirmEmail() {
   const [email, setEmail] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Confirm email:", email);
     // send OTP / confirmation email here
+    navigate("/auth/otp", { state: { email, from: 'forgot' } });
   };
 
   return (
