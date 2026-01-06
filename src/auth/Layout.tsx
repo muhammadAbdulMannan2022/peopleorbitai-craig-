@@ -1,9 +1,19 @@
-// Layout.tsx
-import { Outlet } from "react-router";
+import { Outlet, useNavigate } from "react-router";
+import { ArrowLeft } from "lucide-react";
 
 export default function Layout() {
+  const navigate = useNavigate();
+
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-[#f8fafc]">
+      {/* Mobile Back Button */}
+      <button
+        onClick={() => navigate(-1)}
+        className="md:hidden fixed top-6 left-0 z-50 p-3 bg-white border border-slate-200 rounded-e-xl shadow-sm text-slate-600 active:scale-95 transition-all hover:bg-slate-50 cursor-pointer"
+      >
+        <ArrowLeft size={20} />
+      </button>
+
       {/* Left Panel - Illustration */}
       <div className="hidden md:flex md:w-1/2 sticky top-0 h-screen border-r border-gray-200">
         <div className="w-full h-full flex items-center justify-center relative overflow-hidden">
