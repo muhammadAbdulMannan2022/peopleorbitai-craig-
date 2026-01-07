@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Globe, ChevronRight, Menu, Lock, User } from "lucide-react";
+import { Globe, ChevronRight, Lock, User } from "lucide-react";
 
 interface HeaderProps {
   onMenuClick?: () => void;
@@ -8,7 +8,6 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({
-  onMenuClick,
   userName = "Cameron",
   userAvatar = "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80&w=100",
 }) => {
@@ -37,13 +36,6 @@ export const Header: React.FC<HeaderProps> = ({
       <div className="h-[calc(5rem-0.375rem)] border-b border-gray-100 flex items-center justify-between px-6 md:px-12">
         {/* Left */}
         <div className="flex items-center gap-4">
-          {/* <button
-            onClick={onMenuClick}
-            className="md:hidden p-2 hover:bg-gray-100 rounded-lg text-slate-600"
-          >
-            <Menu size={24} />
-          </button> */}
-
           <img src="/logo.svg" className="h-8 md:h-10" alt="" />
         </div>
 
