@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function WhatWedo() {
+const WhatWedo: React.FC = () => {
   return (
     <div className="flex items-center justify-center py-10 md:py-16 bg-[#f7f7fa] px-5 md:px-0">
       <div className="max-w-7xl flex items-center flex-col gap-8 md:gap-16">
@@ -73,4 +73,5 @@ export default function WhatWedo() {
       </div>
     </div>
   );
-}
+};
+export default WhatWedo;

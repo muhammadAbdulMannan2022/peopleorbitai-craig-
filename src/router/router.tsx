@@ -7,6 +7,7 @@ import Signup from "../auth/pages/Signup";
 import OTP from "../auth/pages/Otp";
 import ConfirmEmail from "../auth/pages/ConfirmEmail";
 import ChangePassword from "../auth/pages/ChangePassword";
+import DashboardLayout from "../Dashboard/Layout";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,20 @@ const router = createBrowserRouter([
           {
             path: "change-password",
             element: <ChangePassword />,
+          },
+        ],
+      },
+      {
+        path: "dashboard",
+        element: <DashboardLayout />,
+        children: [
+          {
+            index: true,
+            element: <Navigate to="/dashboard/chat" replace />,
+          },
+          {
+            path: "chat",
+            element: <div>Chat</div>,
           },
         ],
       },
