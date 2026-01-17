@@ -9,6 +9,8 @@ import ConfirmEmail from "../auth/pages/ConfirmEmail";
 import ChangePassword from "../auth/pages/ChangePassword";
 import DashboardLayout from "../Dashboard/Layout";
 import Chat from "../Dashboard/pages/Chat";
+import Profile from "../Dashboard/pages/Profile";
+import PricingPlans from "../Dashboard/pages/Priceing";
 
 const router = createBrowserRouter([
   {
@@ -64,7 +66,17 @@ const router = createBrowserRouter([
           {
             path: "profile",
             element: (
-              <div className="text-white border border-red-500">Profile</div>
+              <div className="w-full h-full bg-[#EFF2F6]">
+                <Profile />
+              </div>
+            ),
+          },
+          {
+            path: "plan",
+            element: (
+              <div>
+                <PricingPlans />
+              </div>
             ),
           },
         ],

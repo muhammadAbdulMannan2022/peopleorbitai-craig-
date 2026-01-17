@@ -2,6 +2,7 @@ import { ArrowLeft, ArrowRight, Home, LogOut, User } from "lucide-react";
 import { useState } from "react";
 import SidebarChatList from "./SidebarChatList";
 import { useLocation, useNavigate } from "react-router";
+import { RiExchangeDollarLine } from "react-icons/ri";
 
 const agentsData = [
   {
@@ -75,6 +76,12 @@ export default function Sidebar({
               id: 2,
               action: "/dashboard/profile",
             },
+            {
+              name: "Plan",
+              Icon: RiExchangeDollarLine,
+              id: 2,
+              action: "/dashboard/plan",
+            },
             { name: "Logout", Icon: LogOut, id: 3, action: "logout" },
           ].map((Icon, i) => (
             <div
@@ -82,7 +89,7 @@ export default function Sidebar({
               key={i}
               className={`flex flex-col items-center justify-center bg-dashboardNotActive/50 w-full aspect-square rounded-xl text-[10px] sm:text-xs cursor-pointer ${location.pathname.includes("/dashboard/chat") ? "" : "p-2.5"}`}
             >
-              <Icon.Icon size={16} />
+              <Icon.Icon size={18} />
               <p>{Icon.name}</p>
             </div>
           ))}
