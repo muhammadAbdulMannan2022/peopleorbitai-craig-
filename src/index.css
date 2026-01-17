@@ -23,18 +23,3 @@
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
-
-@layer base {
-  *,
-  ::before,
-  ::after {
-    --tw-backdrop-brightness: brightness(1);
-    --tw-backdrop-contrast: contrast(1);
-    --tw-backdrop-grayscale: grayscale(0);
-    --tw-backdrop-hue-rotate: hue-rotate(0deg);
-    --tw-backdrop-invert: invert(0);
-    --tw-backdrop-opacity: opacity(1);
-    --tw-backdrop-saturate: saturate(1);
-    --tw-backdrop-sepia: sepia(0);
-  }
-}

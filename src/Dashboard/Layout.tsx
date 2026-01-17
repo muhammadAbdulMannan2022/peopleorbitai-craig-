@@ -17,12 +17,12 @@ const DashboardLayout = () => {
       <Header onMenuClick={() => toggleSidebar()} />
 
       {/* Content area: flex row for sidebar + main */}
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-1 overflow-hidden ">
         {/* Left sidebar - hidden on mobile, toggled via button */}
         <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
 
         {/* Main area with Outlet - shares space with sidebar */}
-        <main className="bg-gray-900 overflow-y-auto flex-1">
+        <main className="bg-gray-900 overflow-y-auto flex-1 h-[calc(100vh-5rem)] mt-20">
           <Outlet />
         </main>
       </div>

@@ -8,6 +8,7 @@ import OTP from "../auth/pages/Otp";
 import ConfirmEmail from "../auth/pages/ConfirmEmail";
 import ChangePassword from "../auth/pages/ChangePassword";
 import DashboardLayout from "../Dashboard/Layout";
+import Chat from "../Dashboard/pages/Chat";
 
 const router = createBrowserRouter([
   {
@@ -58,11 +59,13 @@ const router = createBrowserRouter([
           },
           {
             path: "chat",
-            element: <div>Chat</div>,
+            element: <Chat />,
           },
           {
             path: "profile",
-            element: <div>Profile</div>,
+            element: (
+              <div className="text-white border border-red-500">Profile</div>
+            ),
           },
         ],
       },

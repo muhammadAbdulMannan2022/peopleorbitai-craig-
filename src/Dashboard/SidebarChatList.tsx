@@ -1,6 +1,7 @@
 import { MessageSquare, MoreVertical, Plus } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { TbArrowBackUp } from "react-icons/tb";
+import { useNavigate, useSearchParams } from "react-router";
 
 type Chat = {
   id: number;
@@ -336,6 +337,9 @@ function NameInputModal({ isOpen, onClose, onSubmit }: NameInputModalProps) {
 }
 
 export default function SidebarChatList() {
+  const [searchParams] = useSearchParams();
+  const assignmentId = searchParams.get("assignmentId");
+  const chatId = searchParams.get("chatId");
   const [assignments, setAssignments] =
     useState<Assignment[]>(initialAssignments);
   const [activeAssignmentId, setActiveAssignmentId] = useState<number | null>(
@@ -345,6 +349,24 @@ export default function SidebarChatList() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const activeAssignment = assignments.find((a) => a.id === activeAssignmentId);
+
+  const navigate = useNavigate();
+
+  // handle direct visit the chat [ deshi way ]
+  useEffect(() => {
+    if (!assignmentId) return;
+
+    const assignment = assignments.find((a) => String(a.id) === assignmentId);
+
+    if (!assignment) return;
+
+    setActiveAssignmentId(assignment.id);
+
+    if (chatId) {
+      const chat = assignment.chats.find((c) => String(c.id) === chatId);
+      setActiveChatId(chat?.id ?? null);
+    }
+  }, [assignmentId, chatId, assignments]);
 
   const handleCreateAssignment = (name: string) => {
     const newAssignment: Assignment = {
@@ -370,6 +392,13 @@ export default function SidebarChatList() {
       ),
     );
     setActiveChatId(newChat.id);
+  };
+
+  const handleActiveChat = (chatId: number) => {
+    setActiveChatId(chatId);
+    navigate(
+      `/dashboard/chat?assignmentId=${activeAssignmentId}&chatId=${chatId}`,
+    );
   };
 
   return (
@@ -418,6 +447,7 @@ export default function SidebarChatList() {
               onClick={() => {
                 setActiveAssignmentId(null);
                 setActiveChatId(null);
+                navigate("/dashboard/chat");
               }}
               className="p-1 hover:bg-dashboardNotActive/40 rounded hover:cursor-pointer"
             >
@@ -440,7 +470,7 @@ export default function SidebarChatList() {
                 key={chat.id}
                 chat={chat}
                 isActive={activeChatId === chat.id}
-                onSelect={() => setActiveChatId(chat.id)}
+                onSelect={() => handleActiveChat(chat.id)}
                 onDelete={() => {
                   setAssignments((prev) =>
                     prev.map((a) =>
