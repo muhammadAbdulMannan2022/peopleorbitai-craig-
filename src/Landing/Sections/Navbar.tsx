@@ -78,7 +78,7 @@ const Navbar = () => {
     // If past all sections, keep last one active
     if (!found) {
       const lastSection = document.getElementById(
-        sections[sections.length - 1]
+        sections[sections.length - 1],
       );
       if (lastSection) {
         const bottom = lastSection.getBoundingClientRect().bottom + scrollY;
@@ -108,23 +108,29 @@ const Navbar = () => {
   /* -------------------------------------------------------------- */
   /*  Reusable NavLink with active state                           */
   /* -------------------------------------------------------------- */
-  const NavLink = ({ id, label }: { id: string; label: string }) => (
-    <Link
-      to={`#${id}`}
-      onClick={(e) => {
-        e.preventDefault();
-        onLinkClick(id);
-      }}
-      className={`block transition-colors text-lg font-open-san 
-        ${
-          activeId === id
-            ? "text-main underline font-bold"
-            : "text-navNotActive hover:text-main"
-        }`}
-    >
-      {label}
-    </Link>
-  );
+  const NavLink = ({ id, label }: { id: string; label: string }) => {
+    const isHome = id === "home";
+    
+    return (
+      <Link
+        to={isHome ? "/" : `#${id}`}
+        onClick={(e) => {
+          if (!isHome) {
+            e.preventDefault();
+            onLinkClick(id);
+          }
+        }}
+        className={`block transition-colors text-lg font-open-san 
+          ${
+            activeId === id
+              ? "text-main underline font-bold"
+              : "text-navNotActive hover:text-main"
+          }`}
+      >
+        {label}
+      </Link>
+    );
+  };
 
   return (
     <>
@@ -133,9 +139,9 @@ const Navbar = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white shadow-xl rounded-full border border-[#E7E7F0]">
           <div className="flex justify-between items-center h-16">
             {/* LOGO */}
-            <div className="flex items-center">
+            <Link to="/" className="flex items-center">
               <img src="/logo.svg" className="h-8" alt="Logo" />
-            </div>
+            </Link>
 
             {/* DESKTOP: LINKS & BUTTONS */}
             <div className="hidden md:flex items-center space-x-8">
@@ -144,12 +150,18 @@ const Navbar = () => {
               <NavLink id="faq" label="FAQ" />
 
               <div className="flex items-center space-x-3">
-                <button className="px-4 font-open-san py-2 text-main font-medium border border-main rounded-lg hover:bg-purple-50 transition-colors hover:cursor-pointer">
+                <Link
+                  to="/auth/login"
+                  className="px-4 font-open-san py-2 text-main font-medium border border-main rounded-lg hover:bg-purple-50 transition-colors hover:cursor-pointer"
+                >
                   Login
-                </button>
-                <button className="px-4 font-open-san py-2 bg-main text-white font-medium border border-main rounded-lg hover:bg-main/90 transition-colors hover:cursor-pointer">
+                </Link>
+                <Link
+                  to="/auth/signup"
+                  className="px-4 font-open-san py-2 bg-main text-white font-medium border border-main rounded-lg hover:bg-main/90 transition-colors hover:cursor-pointer"
+                >
                   Sign Up
-                </button>
+                </Link>
               </div>
             </div>
 
@@ -207,12 +219,18 @@ const Navbar = () => {
 
               {/* Mobile Buttons */}
               <div className="mt-8 space-y-3">
-                <button className="w-full font-open-san px-4 py-3 text-main font-medium border border-main rounded-lg hover:bg-purple-50 transition-colors hover:cursor-pointer">
+                <Link
+                  to="/auth/login"
+                  className="w-full block text-center font-open-san px-4 py-3 text-main font-medium border border-main rounded-lg hover:bg-purple-50 transition-colors hover:cursor-pointer"
+                >
                   Login
-                </button>
-                <button className="w-full font-open-san px-4 py-3 bg-main text-white font-medium rounded-lg hover:bg-main/90 transition-colors hover:cursor-pointer">
+                </Link>
+                <Link
+                  to="/auth/signup"
+                  className="w-full block text-center font-open-san px-4 py-3 bg-main text-white font-medium rounded-lg hover:bg-main/90 transition-colors hover:cursor-pointer"
+                >
                   Sign Up
-                </button>
+                </Link>
               </div>
             </div>
           </div>

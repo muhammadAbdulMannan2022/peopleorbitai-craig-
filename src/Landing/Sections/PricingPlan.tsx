@@ -1,151 +1,191 @@
 import React from "react";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Plus } from "lucide-react";
 
-interface PlanProps {
-  price: string;
-  isFeatured?: boolean;
-  features: string[];
-  footerNote: string;
-  buttonLabel: string;
+interface PlanOption {
+  name: string;
+  monthly: string;
+  annual: string;
+  addTrainingMonthly?: string;
+  addTrainingAnnual?: string;
 }
 
-const PlanCard: React.FC<PlanProps> = ({
-  price,
-  isFeatured,
-  features,
-  footerNote,
-  buttonLabel,
-}) => {
+interface PricingTier {
+  title: string;
+  seats: string;
+  description: string;
+  options: PlanOption[];
+}
+
+const PricingTierCard: React.FC<PricingTier> = ({ title, seats, description, options }) => {
+  const [isAnnual, setIsAnnual] = React.useState(false);
+
   return (
-    <div
-      className={`relative flex flex-col rounded-[2.5rem] overflow-hidden transition-all duration-500 hover:translate-y-2 ${
-        isFeatured
-          ? "bg-white shadow-2xl scale-105 z-10 border-none"
-          : "bg-[#f4f4f4] shadow-lg border border-gray-100"
-      }`}
-    >
-      {/* Top Header Section */}
-      <div
-        className={`pt-12 pb-10 px-8 text-center flex flex-col items-center justify-center ${
-          isFeatured ? "bg-[#777CDC] text-white" : "text-title-2nd"
-        }`}
-      >
-        {isFeatured && (
-          <div className="absolute top-8 right-8">
-            <div className="w-10 h-10 ounded-lg flex items-center justify-center transform rotate-12">
-              <span className="text-4xl">👑</span>
-            </div>
-          </div>
-        )}
-        <div className="flex items-baseline gap-1 ">
-          <span className="text-4xl md:text-5xl font-black">{price}</span>
-          <span className={`text-sm font-semibold opacity-80`}>/Per Month</span>
+    <div className="bg-white rounded-[2.5rem] shadow-xl border border-gray-100 overflow-hidden">
+      <div className="pt-10 pb-6 px-8 text-center bg-[#777CDC] text-white">
+        <h3 className="text-2xl font-black mb-1">{title}</h3>
+        <p className="text-white/80 text-sm mb-4">{seats}</p>
+        <p className="text-white/60 text-xs mb-6">{description}</p>
+        <div className="flex justify-center bg-white/10 rounded-lg p-1 w-fit mx-auto">
+          <button
+            onClick={() => setIsAnnual(false)}
+            className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
+              !isAnnual ? "bg-white text-[#777CDC]" : "text-white/70"
+            }`}
+          >
+            Monthly
+          </button>
+          <button
+            onClick={() => setIsAnnual(true)}
+            className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
+              isAnnual ? "bg-white text-[#777CDC]" : "text-white/70"
+            }`}
+          >
+            Annual
+          </button>
+        </div>
+        <div className="text-3xl font-black mt-4">
+          From ${isAnnual 
+            ? options.reduce((sum, opt) => {
+                const base = parseFloat(opt.annual.replace(/,/g, ""));
+                const training = opt.addTrainingAnnual ? parseFloat(opt.addTrainingAnnual.replace(/,/g, "")) : 0;
+                return sum + base + training;
+              }, 0).toFixed(2)
+            : options.reduce((sum, opt) => {
+                const base = parseFloat(opt.monthly);
+                const training = opt.addTrainingMonthly ? parseFloat(opt.addTrainingMonthly) : 0;
+                return sum + base + training;
+              }, 0).toFixed(2)
+          }/{isAnnual ? "yr" : "mo"}
         </div>
       </div>
 
-      {/* Feature List Section */}
-      <div className="bg-white grow px-8 py-10">
-        <ul className="space-y-4 mb-8">
-          {features.map((feature, idx) => (
-            <li
-              key={idx}
-              className="flex items-center gap-4 text-[#475569] font-medium text-sm md:text-base"
-            >
-              <CheckCircle2
-                size={20}
-                className={isFeatured ? "text-[#7c7cf1]" : "text-title-2nd"}
-              />
-              {feature}
-            </li>
-          ))}
-        </ul>
-      </div>
+      <div className="p-8">
+        <ul className="space-y-4">
+          {options.map((option, idx) => {
+            const basePrice = isAnnual ? parseFloat(option.annual.replace(/,/g, "")) : parseFloat(option.monthly);
+            const trainingPrice = isAnnual 
+              ? (option.addTrainingAnnual ? parseFloat(option.addTrainingAnnual.replace(/,/g, "")) : 0)
+              : (option.addTrainingMonthly ? parseFloat(option.addTrainingMonthly) : 0);
+            const total = (basePrice + trainingPrice).toFixed(2);
 
-      {/* Bottom Action Section */}
-      <div className={`px-8 pb-10 pt-4 text-center bg-[#EFEFF2]`}>
-        <p className="text-[10px] md:text-xs text-slate-400 mb-8 leading-relaxed px-4">
-          {footerNote}
-        </p>
-        <button
-          className={`w-full py-4 rounded-2xl font-bold text-sm md:text-base transition-all active:scale-95 border hover:cursor-pointer ${
-            isFeatured
-              ? "bg-[#8A7DE6] text-white hover:bg-[#6366f1] border-[#8A7DE6]"
-              : "bg-white text-title-2nd border-gray-100 hover:bg-slate-50"
-          }`}
-        >
-          {buttonLabel}
-        </button>
+            return (
+              <li key={idx} className="bg-[#f8f8f8] rounded-2xl p-4">
+                <div className="flex justify-between items-start mb-2">
+                  <span className="font-bold text-[#464E5F]">{option.name}</span>
+                  <div className="text-right">
+                    <span className="text-xl font-black text-[#777CDC]">
+                      ${total}
+                    </span>
+                    <span className="text-xs text-gray-500">/{isAnnual ? "yr" : "mo"}</span>
+                  </div>
+                </div>
+                {option.addTrainingMonthly && (
+                  <div className="text-xs text-gray-500 flex items-center gap-1">
+                    <Plus size={12} />
+                    Add Training +${isAnnual ? option.addTrainingAnnual : option.addTrainingMonthly}/{isAnnual ? "yr" : "mo"}
+                  </div>
+                )}
+                {idx === 0 && <div className="text-xs text-green-600 mt-2 font-medium">Best Value</div>}
+              </li>
+            );
+          })}
+        </ul>
+
+        <div className="mt-6 pt-6 border-t border-gray-100">
+          <div className="flex items-center gap-2 text-sm text-gray-600 mb-4">
+            <CheckCircle2 size={18} className="text-green-500" />
+            Email Support
+          </div>
+          <button className="w-full py-4 rounded-2xl font-bold bg-[#8A7DE6] text-white hover:bg-[#6366f1] transition-all">
+            Get Started
+          </button>
+        </div>
       </div>
     </div>
   );
 };
 
 export const PricingPlans: React.FC = () => {
-  const plans: PlanProps[] = [
+  const tiers: PricingTier[] = [
     {
-      price: "$100",
-      features: [
-        "Unlimited AI Recommendations",
-        "Advanced & Personalized Suggestions",
-        "Full Conversation History",
-        "Priority Affiliate Deals",
-        "AI Memory & Preferences",
-        "Priority Support",
+      title: "Solo Pro",
+      seats: "(1 seat)",
+      description: "Best for individuals",
+      options: [
+        { name: "Either HR or TA agent", monthly: "39", annual: "390", addTrainingMonthly: "9.95", addTrainingAnnual: "99.50" },
+        { name: "HR & TA agent", monthly: "59", annual: "590", addTrainingMonthly: "9.95", addTrainingAnnual: "99.50" },
+        { name: "Training Only", monthly: "9.95", annual: "99.50" },
       ],
-      footerNote:
-        "The Professional Plan Offers The Best Value With AI Automation, Seamless Integrations, And Priority Support",
-      buttonLabel: "Get Started",
     },
     {
-      price: "$100",
-      isFeatured: true,
-      features: [
-        "Unlimited AI Recommendations",
-        "Advanced & Personalized Suggestions",
-        "Full Conversation History",
-        "Priority Affiliate Deals",
-        "AI Memory & Preferences",
-        "Priority Support",
+      title: "Team Flex",
+      seats: "(5 seats)",
+      description: "Best for small teams",
+      options: [
+        { name: "Either HR or TA agent", monthly: "175", annual: "1,750", addTrainingMonthly: "39.95", addTrainingAnnual: "399.50" },
+        { name: "HR & TA agent", monthly: "275", annual: "2,750", addTrainingMonthly: "39.95", addTrainingAnnual: "399.50" },
+        { name: "Training Only", monthly: "39.95", annual: "399.50" },
       ],
-      footerNote:
-        "The Professional Plan Offers The Best Value With AI Automation, Seamless Integrations, And Priority Support",
-      buttonLabel: "Upgrade Now",
     },
     {
-      price: "$100",
-      features: [
-        "Unlimited AI Recommendations",
-        "Advanced & Personalized Suggestions",
-        "Full Conversation History",
-        "Priority Affiliate Deals",
-        "AI Memory & Preferences",
-        "Priority Support",
+      title: "Enterprise+",
+      seats: "(6+ seats)",
+      description: "Best for large organizations",
+      options: [
+        { name: "Either HR or TA agent", monthly: "29", annual: "290", addTrainingMonthly: "8.95", addTrainingAnnual: "89.50" },
+        { name: "HR & TA agent", monthly: "49", annual: "490", addTrainingMonthly: "8.95", addTrainingAnnual: "89.50" },
+        { name: "Training Only", monthly: "8.95", annual: "89.50" },
       ],
-      footerNote:
-        "The Professional Plan Offers The Best Value With AI Automation, Seamless Integrations, And Priority Support",
-      buttonLabel: "Get Started",
     },
   ];
 
   return (
     <section id="pricing" className="py-24 px-6 md:px-16 bg-[#fafafa]">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
         <div className="text-center mb-20">
           <h2 className="text-5xl md:text-6xl font-black text-title-2nd mb-6 tracking-tight">
             Our Pricing Plans
           </h2>
           <p className="text-text-2nd text-lg max-w-xl mx-auto">
             Choose a plan that fits your needs, from monthly to annual options.
-            Enjoy premium features today.
+            All prices +GST
           </p>
         </div>
 
-        {/* Pricing Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 items-center pt-8">
-          {plans.map((plan, index) => (
-            <PlanCard key={index} {...plan} />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {tiers.map((tier, idx) => (
+            <PricingTierCard key={idx} {...tier} />
           ))}
+        </div>
+
+        <div className="mt-16 text-center">
+          <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 md:p-12 max-w-2xl mx-auto">
+            <h3 className="text-2xl md:text-3xl font-black text-title-2nd mb-4">
+              Custom Agents
+            </h3>
+            <p className="text-text-2nd mb-6">Please contact for pricing</p>
+            <ul className="space-y-3 text-[#475569] mb-8">
+              <li className="flex items-center gap-3">
+                <CheckCircle2 size={20} className="text-[#7c7cf1]" />
+                Tailored Agents
+              </li>
+              <li className="flex items-center gap-3">
+                <CheckCircle2 size={20} className="text-[#7c7cf1]" />
+                Locked Privacy Server
+              </li>
+              <li className="flex items-center gap-3">
+                <CheckCircle2 size={20} className="text-[#7c7cf1]" />
+                Customised Knowledge Bank
+              </li>
+              <li className="flex items-center gap-3">
+                <CheckCircle2 size={20} className="text-[#7c7cf1]" />
+                Integrations
+              </li>
+            </ul>
+            <button className="px-8 py-4 rounded-2xl font-bold bg-[#8A7DE6] text-white hover:bg-[#6366f1] transition-all border border-[#8A7DE6]">
+              Contact Us
+            </button>
+          </div>
         </div>
       </div>
     </section>

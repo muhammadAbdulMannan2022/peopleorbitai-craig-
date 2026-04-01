@@ -10,7 +10,7 @@ import { WhyChooseUs } from "./Sections/WhyUs";
 
 export default function Landing() {
   return (
-    <div className="">
+    <div>
       <Hero />
       <WhatWedo />
       <FeatureSection />
