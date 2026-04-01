@@ -34,7 +34,7 @@ export const HowItWorks: React.FC = () => {
     },
     {
       number: "03",
-      label: "Start Use",
+      label: "Enjoy",
       bgColor: "bg-[#8b5cf6]", // Purple
     },
   ];
@@ -45,7 +45,7 @@ export const HowItWorks: React.FC = () => {
         {/* Header */}
         <div className="mb-20">
           <span className="text-[#6d28d9] font-semibold text-sm tracking-widest uppercase mb-4 block">
-            Easy and Fast response
+            Training & Agents
           </span>
           <h2 className="text-5xl md:text-6xl font-black text-[#1a1a2e] mb-6 tracking-tight">
             How It Works
@@ -71,8 +71,8 @@ export const HowItWorks: React.FC = () => {
                     idx == 0
                       ? "rounded-s-full"
                       : idx == 2
-                      ? "rounded-e-full"
-                      : ""
+                        ? "rounded-e-full"
+                        : ""
                   } bg-[#EBEEF2] z-0`}
                 ></div>
                 {/* Main Step Circle */}
@@ -107,18 +107,18 @@ export const HowItWorks: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <StepCard
             step={1}
-            title="One Time Payment"
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna, tortor tempus. Lorem ipsum dolor sit amet, consectetur"
+            title="Sign Up"
+            description="Set up your account  For multiple users contact us directly and we can assign any number of seats for your team."
           />
           <StepCard
             step={2}
-            title="Choose Membership"
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna, tortor tempus. Lorem ipsum dolor sit amet, consectetur"
+            title="Subscribe"
+            description="Choose your Agents and Training plan. We’re flexible to ensure the solution is right for you."
           />
           <StepCard
             step={3}
-            title="Enjoy the Service"
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna, tortor tempus. Lorem ipsum dolor sit amet, consectetur"
+            title="Enjoy"
+            description="Have access to your dedicated AI Assistant immediately. Begin your training and become a true AI native."
           />
         </div>
       </div>

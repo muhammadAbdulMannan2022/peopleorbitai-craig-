@@ -18,24 +18,24 @@ interface FeatureContent {
 const AGENTS: Agent[] = [
   {
     id: "1",
-    name: "Agent Liono",
+    name: "AI Training for HR and L&D",
     avatar: "/bot1.png",
     description:
-      "Our lead material specialist with over 15 years in luxury upholstery and sustainable sourcing. Liono ensures every thread meets the Panto gold standard.",
+      "Microcredentials: AI fundamentals, policy and governance, safe prompting, analytics for HR, change enablement. Benefits: CPD-aligned, role-based capability uplift, safer adoption, measurable productivity gains, and consistent, audit-ready practice across teams.",
   },
   {
     id: "2",
-    name: "Agent Romono",
+    name: "AI Training for TA & Recruitment",
     avatar: "/bot2.png",
     description:
-      "Romono focuses on structural integrity and ergonomic design, blending traditional craftsmanship with modern engineering principles.",
+      "Microcredentials: sourcing prompts, JD and job-ad writing, diversity-aware language, interview guides and rubrics, Boolean mastery, candidate comms. Benefits: faster time-to-fill, higher quality, compliance by design, and scalable best practice.",
   },
 ];
 
 const MAIN_CONTENT: FeatureContent = {
   tag: "MATERIALS",
-  title: "Very Serious Materials For Making Furniture",
-  body: "Because Panto is deeply committed to designing furniture that respects our environment, we utilize premium, globally-recognized materials while maintaining surprisingly accessible pricing. Our philosophy balances high-end aesthetics with structural longevity, ensuring that every piece is not just furniture, but a lifelong companion for your home. We source our wood from certified sustainable forests and our metals from recycled high-grade alloys.",
+  title: "You can’t implement what you don’t know – allow us to teach you.",
+  body: "Short, focused online modules that slot into busy HR and TA diaries. Think Intro to AI for HR, Prompt craft for recruiters, safe use policies, and real-world exercises you can apply the same day. We keep it practical, role-based AI-specific and in plain english. Teams finish confident, compliant and faster — with reusable templates to lift quality across the board, and digital certification upon completion",
 };
 
 // --- Internal Sub-component ---
@@ -65,11 +65,10 @@ export const FeatureSection: React.FC = () => {
       {/* Section Header */}
       <div className="text-center mb-16 md:mb-24">
         <h2 className="text-4xl md:text-5xl font-extrabold text-title-2nd mb-4">
-          Exclusive Features
+          AI Training
         </h2>
         <p className="text-gray-500 max-w-2xl mx-auto text-lg">
-          Experience the harmony of traditional craftsmanship and visionary
-          design.
+          Micro-Learning that makes AI Stick.
         </p>
       </div>
 

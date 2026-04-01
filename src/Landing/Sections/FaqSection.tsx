@@ -60,44 +60,49 @@ export const FAQSection: React.FC = () => {
 
   const faqs = [
     {
-      question: "How long does delivery take?",
+      question: "What does PeopleOrbitAI actually do?",
       answer:
-        "Typically, orders are processed within 2-3 business days. Delivery times vary based on your location but usually range from 5 to 10 business days for most furniture items.",
+        "We help HR and TA teams turn AI into outcomes: we audit your current state, train your people with practical micro-learning, and deploy personal AI agents (Finn & Nell) that produce ready-to-use work—safely and at speed.",
     },
     {
-      question: "What is your return policy?",
+      question: "Which parts are subscription-based?",
       answer:
-        "We offer a 30-day return policy for most items. The product must be in its original condition and packaging. Please note that custom-made items are non-refundable.",
+        "AI Training and AI Agents are offered on subscription plans with tiered usage and team options. Our AI Audit & Consulting is a scoped project (fixed-fee or milestone-based) to set your roadmap before you scale.",
     },
     {
-      question: "Are your materials sustainably sourced?",
+      question: "Do we need the AI Audit before buying training or agents?",
       answer:
-        "Yes, we are committed to sustainability. Our wood comes from FSC-certified forests, and we use recycled metals and eco-friendly fabrics wherever possible.",
+        "Strongly recommended. The audit benchmarks your AI-readiness, clarifies risks, and sequences quick wins—so training and agents land cleanly, with governance and ROI baked in. If timing's tight, we can run a mini-assessment first.",
     },
     {
-      question: "Do you offer international shipping?",
+      question: "Can we customise our training and agents?",
       answer:
-        "Currently, we ship to over 25 countries across North America, Europe, and Asia. Shipping costs and delivery times will be calculated at checkout based on your address.",
+        "Yes, please reach out directly to discuss your needs and we can put together a solution that works.",
     },
     {
-      question: "How do I care for my furniture?",
+      question: "How long does onboarding take?",
       answer:
-        "Each piece comes with a specific care guide. Generally, we recommend avoiding direct sunlight, using coasters for drinks, and dusting regularly with a soft, lint-free cloth.",
+        "Most teams go live in 2–4 weeks: week 1 for setup and guardrails, weeks 2–3 for pilot training and templates, then expand users and use-cases. We keep it lightweight and aligned to your BAU rhythms.",
     },
     {
-      question: "Can I customize the fabric or finish?",
+      question: "Is our data secure and compliant?",
       answer:
-        "Many of our collections offer customization options for upholstery and wood finishes. Look for the 'Customize' button on the product page or contact our design team.",
+        "Yes. We operate with strong privacy controls, role-based access, and audit trails, aligned to Australian Privacy Principles and enterprise expectations. You retain ownership of your data and outputs; we don't use your content to train public models.",
     },
     {
-      question: "Is assembly required for the furniture?",
+      question: "How do Finn (HR) and Nell (TA) fit into our workflow?",
       answer:
-        "Most of our large items come pre-assembled or with minimal assembly required. For items needing assembly, clear instructions and tools are provided in the box.",
+        "They sit beside your team to draft policies, letters, JDs, ads, interview guides, Boolean searches and comms—then file, format, and follow your templates. They learn your tone and cut admin, not corners.",
     },
     {
-      question: "Do you have a physical showroom?",
+      question: "How is pricing structured?",
       answer:
-        "We have flagship showrooms in London, New York, and Tokyo. You can find their addresses and opening hours on our 'Locations' page.",
+        "Subscriptions are tiered for team size and usage, with discounts for annual commitments. The audit is a separate project fee. We'll recommend the leanest plan that meets your outcomes (no gold-plating).",
+    },
+    {
+      question: "What support do we get?",
+      answer:
+        "You'll have access to a customer success lead, help centre, and prompt clinics. For larger teams, we include admin enablement, quarterly optimisation reviews, and optional SLAs for faster response times.",
     },
   ];
 
@@ -111,15 +116,11 @@ export const FAQSection: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-20">
-          <span className="text-[#818cf8] font-bold text-sm tracking-widest uppercase mb-4 block">
-            Got Questions?
-          </span>
           <h2 className="text-5xl md:text-6xl font-black text-title-2nd mb-6 tracking-tight">
-            Frequently Asked Questions
+            FAQ's
           </h2>
           <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto">
-            Everything you need to know about our products, shipping, and
-            sustainable craftsmanship.
+            Here are the answers to the most frequently asked questions. If you can't find what you are looking for, please contact us directly.
           </p>
         </div>
 

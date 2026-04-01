@@ -36,23 +36,23 @@ export const WhyChooseUs: React.FC = () => {
     {
       icon: <BoxSelect size={32} />,
       iconBg: "bg-[#7db343]",
-      title: "One time payment",
+      title: "Expertise in AI Audit & Consulting",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna, tortor tempus. Lorem ipsum dolor sit amet, consectetur",
+        "We will assess your AI-readiness and provide a clear and achievable roadmap to ensure you are benefitting from the AI revolution.",
     },
     {
       icon: <Waves size={32} />,
       iconBg: "bg-[#4db6ac]",
-      title: "Modifyable payment",
+      title: "AI Micro-Learning for your Team",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna, tortor tempus. Lorem ipsum dolor sit amet, consectetur",
+        "How can you make the most of AI if you don’t understand what you’re doing? PeopleOrbit is here to help with guided learning and actionable outcomes.",
     },
     {
       icon: <Map size={32} />,
       iconBg: "bg-[#9575cd]",
-      title: "Accurate Heatmap",
+      title: "AI Agents who assist you with what you need",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Urna, tortor tempus. Lorem ipsum dolor sit amet, consectetur",
+        "Everybody deserves an assistant to complete the mundane and repetitive tasks that take up so much of your day – now you have one!",
     },
   ];
 
@@ -68,7 +68,7 @@ export const WhyChooseUs: React.FC = () => {
             Why Choose Us
           </h2>
           <p className="text-text-2nd text-xl">
-            Lorem ipsum dolor sit amet, consectetur
+            We are the AI experts for HR/L&D and TA/Recruitment
           </p>
         </div>
 
