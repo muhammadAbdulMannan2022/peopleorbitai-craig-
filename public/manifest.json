@@ -1,6 +1,6 @@
 {
-  "short_name": "Peopleorbit AI",
-  "name": "Peopleorbit AI",
+  "short_name": "PeopleOrbitAI",
+  "name": "PeopleOrbitAI - AI for HR & TA Teams",
   "icons": [
     {
       "src": "/192.png",
@@ -15,6 +15,7 @@
   ],
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#777CDC",
+  "background_color": "#ffffff",
+  "description": "AI-powered HR and Talent Acquisition solutions"
 }
