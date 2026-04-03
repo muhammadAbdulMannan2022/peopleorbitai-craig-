@@ -1,77 +1,125 @@
-import React from "react";
+import React, { useRef, useState } from "react";
+import { Pause, Play, Volume2, VolumeX } from "lucide-react";
 
 const WhatWedo: React.FC = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  const [showControls, setShowControls] = useState(false);
+
+  const toggleVideo = () => {
+    if (!videoRef.current) return;
+    if (isPlaying) {
+      videoRef.current.pause();
+    } else {
+      videoRef.current.play();
+    }
+    setIsPlaying(!isPlaying);
+  };
+
+  const toggleMute = () => {
+    if (!videoRef.current) return;
+    videoRef.current.muted = !isMuted;
+    setIsMuted(!isMuted);
+  };
+
   return (
-    <div className="flex items-center justify-center py-10 md:py-16 bg-[#f7f7fa] px-5 md:px-0">
-      <div className="max-w-7xl flex items-center flex-col gap-8 md:gap-16">
-        <div className="flex flex-col items-center justify-center md:max-w-4xl gap-5">
-          <h1 className="text-3xl md:text-6xl font-bold text-center text-title-2nd">
-            What is <span className="text-main">PROMPTAi</span> Do?
-          </h1>
-          <p className="text-center text-base md:text-xl font-open-san text-text-2nd">
+    <section className="bg-[#f7f7fa] py-16 px-6">
+      <div className="max-w-5xl mx-auto flex flex-col items-center">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold text-[#2F327D] mb-6">
+            What is <span className="text-[#6C5CE7]">PROMPTAi</span> Do?
+          </h2>
+          <p className="text-gray-500 text-lg md:text-xl max-w-4xl leading-relaxed">
             TOTC is a platform that allows educators to create online classes
             whereby they can store the course materials online; manage
             assignments, quizzes and exams; monitor due dates; grade results and
             provide students with feedback all in one place.
           </p>
         </div>
-        <div className="flex flex-col md:flex-row gap-5 md:8">
-          <div className="flex flex-col items-center">
-            <h1 className="text-title-2nd font-bold text-2xl md:text-2xl mb-5 md:mb-2 ">
-              Helper AI Talent Acquisition
-            </h1>
-            <div className="relative border-8 border-[#f7f7fa]  rounded-tl-4xl">
-              <div className="relative z-10">
-                <div className="absolute shadow w-20 h-20 -top-4 -right-4 md:hidden flex items-center justify-center rounded-full border-8 border-[#f7f7fa] bg-white">
-                  <div className="bg-radial from-[#EFF0FD] to-main/10 w-full h-full rounded-full flex items-center justify-center">
-                    <img
-                      src="/logosm.svg"
-                      className="aspect-square w-18 h-18"
-                      alt=""
-                    />
-                  </div>
-                </div>
-              </div>
-              <img src="/WhatDoR.jpg" className="rounded-tl-4xl" alt="" />
-              <div className="w-full h-full bg-blue-600/10 absolute top-0 rounded-tl-4xl"></div>
-              <div className="w-full h-[15%] bg-linear-to-b z-1 from-transparent via-[#f7f7fa] to-[#f7f7fa]  absolute -bottom-2 "></div>
-            </div>
-          </div>
-          <div className="relative z-10">
-            <div className="absolute w-30 h-30 -top-3 -left-15 hidden md:flex items-center justify-center rounded-full border-8 border-[#f7f7fa] bg-white">
-              <div className="bg-radial from-[#EFF0FD] to-main/10 w-full h-full rounded-full flex items-center justify-center">
-                <img
-                  src="/logosm.svg"
-                  className="aspect-square w-18 h-18"
-                  alt=""
+
+        <div
+          className="relative w-full max-w-4xl aspect-video rounded-3xl overflow-hidden shadow-2xl mb-20 bg-black"
+          onMouseEnter={() => setShowControls(true)}
+          onMouseLeave={() => setShowControls(false)}
+        >
+          <video
+            ref={videoRef}
+            className={`w-full h-full object-cover ${isPlaying ? "opacity-100" : "opacity-0"}`}
+            onClick={toggleVideo}
+            onPlay={() => setIsPlaying(true)}
+            onPause={() => setIsPlaying(false)}
+            playsInline
+            muted
+            autoPlay
+          >
+            <source
+              src="https://videos.pexels.com/video-files/12363703/12363703-uhd_2560_1440_24fps.mp4"
+              type="video/mp4"
+            />
+          </video>
+
+          {!isPlaying && (
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: "url(/your-video-placeholder.png)" }}
+            />
+          )}
+
+          <div
+            className={`absolute inset-0 flex items-center justify-center ${!isPlaying && "bg-black/30"} hover:cursor-pointer`}
+            onClick={toggleVideo}
+          >
+            {!isPlaying && (
+              <button
+                // onClick={toggleVideo}
+                className="w-20 h-20 hover:cursor-pointer bg-white/90 rounded-full flex items-center justify-center shadow-lg transform hover:scale-110 transition-transform pointer-events-auto"
+              >
+                <Play
+                  className="text-[#FF4D4D] fill-[#FF4D4D] ml-1"
+                  size={32}
                 />
-              </div>
-            </div>
+              </button>
+            )}
           </div>
-          <div className="flex flex-col items-center">
-            <h1 className="text-title-2nd font-bold text-2xl md:text-2xl mb-5 md:mb-2 ">
-              Learning and Development of HR{" "}
-            </h1>
-            <div className="relative border-8 border-[#f7f7fa] rounded-tr-4xl">
-              <div className="relative z-10">
-                <div className="absolute shadow w-20 h-20 -top-4 -left-4 md:hidden flex items-center justify-center rounded-full border-8 border-[#f7f7fa] bg-white">
-                  <div className="bg-radial from-[#EFF0FD] to-main/10 w-full h-full rounded-full flex items-center justify-center">
-                    <img
-                      src="/logosm.svg"
-                      className="aspect-square w-18 h-18"
-                      alt=""
-                    />
-                  </div>
-                </div>
-              </div>
-              <img src="WhatDoL.jpg" className="rounded-tr-4xl" alt="" />
-              <div className="w-full h-full bg-blue-600/10 absolute top-0 rounded-tr-4xl"></div>
-              <div className="w-full h-[15%] bg-linear-to-b z-1 from-transparent via-[#f7f7fa] to-[#f7f7fa]  absolute -bottom-2"></div>
+
+          {(showControls || isPlaying) && (
+            <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/70 to-transparent p-4 flex items-center gap-4">
+              <button
+                onClick={toggleVideo}
+                className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/40 transition-colors"
+              >
+                {isPlaying ? (
+                  <Pause className="text-white fill-white" size={20} />
+                ) : (
+                  <Play className="text-white fill-white ml-0.5" size={20} />
+                )}
+              </button>
+              <button
+                onClick={toggleMute}
+                className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/40 transition-colors"
+              >
+                {isMuted ? (
+                  <VolumeX className="text-white" size={20} />
+                ) : (
+                  <Volume2 className="text-white" size={20} />
+                )}
+              </button>
+              {/* <span className="text-white text-sm">
+                {isPlaying ? "Playing..." : "Paused"}
+              </span> */}
             </div>
+          )}
+        </div>
+
+        <div className="relative w-full">
+          <div className="flex flex-col items-center justify-center w-full max-w-5xl">
+            <img src="/ilastration.png" alt="ilastration" className="w-full" />
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
+
 export default WhatWedo;
