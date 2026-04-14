@@ -56,8 +56,6 @@ const FAQItem: React.FC<FAQItemProps> = ({
 };
 
 export const FAQSection: React.FC = () => {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
-
   const faqs = [
     {
       question: "What does PeopleOrbitAI actually do?",
@@ -105,6 +103,7 @@ export const FAQSection: React.FC = () => {
         "You'll have access to a customer success lead, help centre, and prompt clinics. For larger teams, we include admin enablement, quarterly optimisation reviews, and optional SLAs for faster response times.",
     },
   ];
+  const [openIndex, setOpenIndex] = useState<number | null>(faqs.length - 1);
 
   // Split FAQs into two columns to prevent height-sync issues in a single grid row
   const half = Math.ceil(faqs.length / 2);
@@ -120,7 +119,8 @@ export const FAQSection: React.FC = () => {
             FAQ's
           </h2>
           <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto">
-            Here are the answers to the most frequently asked questions. If you can't find what you are looking for, please contact us directly.
+            Here are the answers to the most frequently asked questions. If you
+            can't find what you are looking for, please contact us directly.
           </p>
         </div>
 

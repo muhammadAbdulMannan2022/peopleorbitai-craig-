@@ -51,8 +51,7 @@ export const HowItWorks: React.FC = () => {
             How It Works
           </h2>
           <p className="text-gray-500 text-lg max-w-xl mx-auto px-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-            eiusmod tempor incididunt ut labore.
+            Choose or combine your solutions
           </p>
         </div>
 

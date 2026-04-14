@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Pause, Play, Volume2, VolumeX } from "lucide-react";
+import SolutionsImageMap from "../../utils/ImageMap";
 
 const WhatWedo: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -28,13 +29,13 @@ const WhatWedo: React.FC = () => {
       <div className="max-w-5xl mx-auto flex flex-col items-center">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-[#2F327D] mb-6">
-            What is <span className="text-[#6C5CE7]">PROMPTAi</span> Do?
+            What Does <span className="text-[#6C5CE7]">PeopleOrbitAI</span> Do?
           </h2>
           <p className="text-gray-500 text-lg md:text-xl max-w-4xl leading-relaxed">
-            TOTC is a platform that allows educators to create online classes
-            whereby they can store the course materials online; manage
-            assignments, quizzes and exams; monitor due dates; grade results and
-            provide students with feedback all in one place.
+            PeopleOrbitAI turns AI into outcomes for HR, L&D, Talent Acquisition
+            and Recruitment. Audit for clarity, Train for capability, and employ
+            Agents for efficiency—customised, secure, and ready to support your
+            function. Subscription or customisation – the choice is yours.
           </p>
         </div>
 
@@ -51,7 +52,7 @@ const WhatWedo: React.FC = () => {
             onPause={() => setIsPlaying(false)}
             playsInline
             muted
-            autoPlay
+            // autoPlay
           >
             <source
               src="https://videos.pexels.com/video-files/12363703/12363703-uhd_2560_1440_24fps.mp4"
@@ -113,9 +114,7 @@ const WhatWedo: React.FC = () => {
         </div>
 
         <div className="relative w-full">
-          <div className="flex flex-col items-center justify-center w-full max-w-5xl">
-            <img src="/ilastration.png" alt="ilastration" className="w-full" />
-          </div>
+          <SolutionsImageMap />
         </div>
       </div>
     </section>

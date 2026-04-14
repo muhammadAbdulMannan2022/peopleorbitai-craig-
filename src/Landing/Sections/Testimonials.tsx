@@ -215,7 +215,7 @@ export const TestimonialSection: React.FC = () => {
           <div></div>
           <div className="w-full text-center">
             <h2 className="text-5xl md:text-7xl font-black text-title-2nd mb-6 tracking-tight">
-              Testimonial
+              Brands who work with us
             </h2>
             <p className="text-gray-400 text-xl md:text-2xl font-medium max-w-2xl mx-auto">
               What client think about us?

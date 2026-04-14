@@ -4,7 +4,6 @@ import React from "react";
 interface Agent {
   id: string;
   name: string;
-  avatar: string;
   description: string;
 }
 
@@ -18,30 +17,30 @@ interface FeatureContent {
 const AGENTS: Agent[] = [
   {
     id: "1",
-    name: "AI Training for HR and L&D",
-    avatar: "/bot1.png",
+    name: "AI Audit",
+
     description:
-      "Microcredentials: AI fundamentals, policy and governance, safe prompting, analytics for HR, change enablement. Benefits: CPD-aligned, role-based capability uplift, safer adoption, measurable productivity gains, and consistent, audit-ready practice across teams.",
+      "We benchmark your function with an AI-readiness scorecard, map data flows and risks, review stack and processes, and produce a prioritised backlog with baseline metrics to measure uplift.",
   },
   {
     id: "2",
-    name: "AI Training for TA & Recruitment",
-    avatar: "/bot2.png",
+    name: "AI consultant",
+
     description:
-      "Microcredentials: sourcing prompts, JD and job-ad writing, diversity-aware language, interview guides and rubrics, Boolean mastery, candidate comms. Benefits: faster time-to-fill, higher quality, compliance by design, and scalable best practice.",
+      "We turn the roadmap into delivery: vendor-neutral selection, pilot design, change and comms, governance and guardrails, operating model updates, skills uplift, and ROI tracking so improvements stick.",
   },
 ];
 
 const MAIN_CONTENT: FeatureContent = {
   tag: "MATERIALS",
-  title: "You can’t implement what you don’t know – allow us to teach you.",
-  body: "Short, focused online modules that slot into busy HR and TA diaries. Think Intro to AI for HR, Prompt craft for recruiters, safe use policies, and real-world exercises you can apply the same day. We keep it practical, role-based AI-specific and in plain english. Teams finish confident, compliant and faster — with reusable templates to lift quality across the board, and digital certification upon completion",
+  title: "Most HR & TA functions simply aren’t ready for AI – are you?",
+  body: "We assess your current HR/TA function, tools and workflows to gauge true AI-readiness. You’ll get a clear, practical roadmap: where AI fits, what to pilot first, the guardrails to keep governance tidy, and the metrics that matter. No hype, no vendor bingo — just a sequenced plan to move from curious to capable, with quick wins and scalable foundations.",
 };
 
 // --- Internal Sub-component ---
 const AgentCard: React.FC<{ agent: Agent }> = ({ agent }) => (
   <div className="bg-[#f8f7ff] rounded-3xl p-6 shadow-sm flex flex-col items-start gap-4 transition-all duration-300 hover:shadow-md h-full">
-    <div className="w-12 h-12 rounded-full overflow-hidden shrink-0 bg-[linear-gradient(#7F4DE0,#8F1CAC,#F7F9FF,#7F4DE0)] p-[3px]">
+    {/* <div className="w-12 h-12 rounded-full overflow-hidden shrink-0 bg-[linear-gradient(#7F4DE0,#8F1CAC,#F7F9FF,#7F4DE0)] p-[3px]">
       <div className="w-full h-full rounded-full overflow-hidden bg-[#F7F9FF]">
         <img
           src={agent.avatar}
@@ -49,9 +48,11 @@ const AgentCard: React.FC<{ agent: Agent }> = ({ agent }) => (
           className="w-full h-full object-cover object-top"
         />
       </div>
-    </div>
+    </div> */}
     <div className="flex-1">
-      <h4 className="text-text-2nd font-bold text-lg mb-2">{agent.name}</h4>
+      <h4 className="text-text-2nd font-bold text-lg sm:text-xl mb-2">
+        {agent.name}
+      </h4>
       <p className="text-[#8A8CA1] text-sm leading-relaxed text-left">
         {agent.description}
       </p>
@@ -65,7 +66,7 @@ export const FeatureSection: React.FC = () => {
       {/* Section Header */}
       <div className="text-center mb-16 md:mb-24">
         <h2 className="text-4xl md:text-5xl font-extrabold text-title-2nd mb-4">
-          AI Training
+          AI Consult
         </h2>
         <p className="text-gray-500 max-w-2xl mx-auto text-lg">
           Micro-Learning that makes AI Stick.
