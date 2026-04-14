@@ -45,7 +45,7 @@ export const HowItWorks: React.FC = () => {
         {/* Header */}
         <div className="mb-20">
           <span className="text-[#6d28d9] font-semibold text-sm tracking-widest uppercase mb-4 block">
-            Training & Agents
+            Our Agents
           </span>
           <h2 className="text-5xl md:text-6xl font-black text-[#1a1a2e] mb-6 tracking-tight">
             How It Works
@@ -56,10 +56,15 @@ export const HowItWorks: React.FC = () => {
         </div>
 
         {/* Process Timeline */}
-        <div className=" mb-28 max-w-5xl mx-auto ">
+        <div className=" mb-28 max-w-5xl mx-auto flex items-center justify-center relative">
           {/* Main Connector Line */}
+          <img
+            src="1.png"
+            alt=""
+            className="absolute w-[25%] hidden md:block -bottom-5 -left-[15%]"
+          />
 
-          <div className="flex flex-row justify-between items-start z-10 ">
+          <div className="flex flex-row justify-between items-start z-10 w-full ">
             {steps.map((step, idx) => (
               <div
                 key={idx}
@@ -100,6 +105,11 @@ export const HowItWorks: React.FC = () => {
               </div>
             ))}
           </div>
+          <img
+            src="2.png"
+            alt=""
+            className="absolute w-[25%] hidden md:block -bottom-5 -right-[15%]"
+          />
         </div>
 
         {/* Detail Cards */}
@@ -112,12 +122,12 @@ export const HowItWorks: React.FC = () => {
           <StepCard
             step={2}
             title="Subscribe"
-            description="Choose your Agents and Training plan. We’re flexible to ensure the solution is right for you."
+            description="Choose yourAgent or Agents based on your needs."
           />
           <StepCard
             step={3}
             title="Enjoy"
-            description="Have access to your dedicated AI Assistant immediately. Begin your training and become a true AI native."
+            description=" Have immediate access to your dedicated AI Assistant. Train them to complete all the boring repetitive admin tasks that ruin your day!"
           />
         </div>
       </div>

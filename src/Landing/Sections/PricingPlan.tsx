@@ -1,5 +1,6 @@
 import React from "react";
-import { CheckCircle2, Plus } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
+import { Link, useNavigate } from "react-router";
 
 interface PlanOption {
   name: string;
@@ -16,8 +17,14 @@ interface PricingTier {
   options: PlanOption[];
 }
 
-const PricingTierCard: React.FC<PricingTier> = ({ title, seats, description, options }) => {
+const PricingTierCard: React.FC<PricingTier> = ({
+  title,
+  seats,
+  description,
+  options,
+}) => {
   const [isAnnual, setIsAnnual] = React.useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className="bg-white rounded-[2.5rem] shadow-xl border border-gray-100 overflow-hidden">
@@ -44,48 +51,71 @@ const PricingTierCard: React.FC<PricingTier> = ({ title, seats, description, opt
           </button>
         </div>
         <div className="text-3xl font-black mt-4">
-          From ${isAnnual 
-            ? options.reduce((sum, opt) => {
-                const base = parseFloat(opt.annual.replace(/,/g, ""));
-                const training = opt.addTrainingAnnual ? parseFloat(opt.addTrainingAnnual.replace(/,/g, "")) : 0;
-                return sum + base + training;
-              }, 0).toFixed(2)
-            : options.reduce((sum, opt) => {
-                const base = parseFloat(opt.monthly);
-                const training = opt.addTrainingMonthly ? parseFloat(opt.addTrainingMonthly) : 0;
-                return sum + base + training;
-              }, 0).toFixed(2)
-          }/{isAnnual ? "yr" : "mo"}
+          From $
+          {isAnnual
+            ? options
+                .reduce((sum, opt) => {
+                  const base = parseFloat(opt.annual.replace(/,/g, ""));
+                  const training = opt.addTrainingAnnual
+                    ? parseFloat(opt.addTrainingAnnual.replace(/,/g, ""))
+                    : 0;
+                  return sum + base + training;
+                }, 0)
+                .toFixed(2)
+            : options
+                .reduce((sum, opt) => {
+                  const base = parseFloat(opt.monthly);
+                  const training = opt.addTrainingMonthly
+                    ? parseFloat(opt.addTrainingMonthly)
+                    : 0;
+                  return sum + base + training;
+                }, 0)
+                .toFixed(2)}
+          /{isAnnual ? "yr" : "mo"}
         </div>
       </div>
 
       <div className="p-8">
         <ul className="space-y-4">
           {options.map((option, idx) => {
-            const basePrice = isAnnual ? parseFloat(option.annual.replace(/,/g, "")) : parseFloat(option.monthly);
-            const trainingPrice = isAnnual 
-              ? (option.addTrainingAnnual ? parseFloat(option.addTrainingAnnual.replace(/,/g, "")) : 0)
-              : (option.addTrainingMonthly ? parseFloat(option.addTrainingMonthly) : 0);
+            const basePrice = isAnnual
+              ? parseFloat(option.annual.replace(/,/g, ""))
+              : parseFloat(option.monthly);
+            const trainingPrice = isAnnual
+              ? option.addTrainingAnnual
+                ? parseFloat(option.addTrainingAnnual.replace(/,/g, ""))
+                : 0
+              : option.addTrainingMonthly
+                ? parseFloat(option.addTrainingMonthly)
+                : 0;
             const total = (basePrice + trainingPrice).toFixed(2);
 
             return (
               <li key={idx} className="bg-[#f8f8f8] rounded-2xl p-4">
                 <div className="flex justify-between items-start mb-2">
-                  <span className="font-bold text-[#464E5F]">{option.name}</span>
+                  <span className="font-bold text-[#464E5F]">
+                    {option.name}
+                  </span>
                   <div className="text-right">
                     <span className="text-xl font-black text-[#777CDC]">
                       ${total}
                     </span>
-                    <span className="text-xs text-gray-500">/{isAnnual ? "yr" : "mo"}</span>
+                    <span className="text-xs text-gray-500">
+                      /{isAnnual ? "yr" : "mo"}
+                    </span>
                   </div>
                 </div>
-                {option.addTrainingMonthly && (
+                {/* {option.addTrainingMonthly && (
                   <div className="text-xs text-gray-500 flex items-center gap-1">
                     <Plus size={12} />
                     Add Training +${isAnnual ? option.addTrainingAnnual : option.addTrainingMonthly}/{isAnnual ? "yr" : "mo"}
                   </div>
-                )}
-                {idx === 0 && <div className="text-xs text-green-600 mt-2 font-medium">Best Value</div>}
+                )} */}
+                {/* {idx === 0 && (
+                  <div className="text-xs text-green-600 mt-2 font-medium">
+                    Best Value
+                  </div>
+                )} */}
               </li>
             );
           })}
@@ -96,7 +126,12 @@ const PricingTierCard: React.FC<PricingTier> = ({ title, seats, description, opt
             <CheckCircle2 size={18} className="text-green-500" />
             Email Support
           </div>
-          <button className="w-full py-4 rounded-2xl font-bold bg-[#8A7DE6] text-white hover:bg-[#6366f1] transition-all">
+          <button
+            onClick={() => {
+              navigate("/auth/signup");
+            }}
+            className="w-full py-4 rounded-2xl font-bold bg-[#8A7DE6] text-white hover:bg-[#6366f1] transition-all"
+          >
             Get Started
           </button>
         </div>
@@ -112,9 +147,21 @@ export const PricingPlans: React.FC = () => {
       seats: "(1 seat)",
       description: "Best for individuals",
       options: [
-        { name: "Either HR or TA agent", monthly: "39", annual: "390", addTrainingMonthly: "9.95", addTrainingAnnual: "99.50" },
-        { name: "HR & TA agent", monthly: "59", annual: "590", addTrainingMonthly: "9.95", addTrainingAnnual: "99.50" },
-        { name: "Training Only", monthly: "9.95", annual: "99.50" },
+        {
+          name: "Either HR or TA agent",
+          monthly: "39",
+          annual: "390",
+          addTrainingMonthly: "9.95",
+          addTrainingAnnual: "99.50",
+        },
+        {
+          name: "HR & TA agent",
+          monthly: "59",
+          annual: "590",
+          addTrainingMonthly: "9.95",
+          addTrainingAnnual: "99.50",
+        },
+        // { name: "Training Only", monthly: "9.95", annual: "99.50" },
       ],
     },
     {
@@ -122,9 +169,21 @@ export const PricingPlans: React.FC = () => {
       seats: "(5 seats)",
       description: "Best for small teams",
       options: [
-        { name: "Either HR or TA agent", monthly: "175", annual: "1,750", addTrainingMonthly: "39.95", addTrainingAnnual: "399.50" },
-        { name: "HR & TA agent", monthly: "275", annual: "2,750", addTrainingMonthly: "39.95", addTrainingAnnual: "399.50" },
-        { name: "Training Only", monthly: "39.95", annual: "399.50" },
+        {
+          name: "Either HR or TA agent",
+          monthly: "175",
+          annual: "1,750",
+          addTrainingMonthly: "39.95",
+          addTrainingAnnual: "399.50",
+        },
+        {
+          name: "HR & TA agent",
+          monthly: "275",
+          annual: "2,750",
+          addTrainingMonthly: "39.95",
+          addTrainingAnnual: "399.50",
+        },
+        // { name: "Training Only", monthly: "39.95", annual: "399.50" },
       ],
     },
     {
@@ -132,9 +191,21 @@ export const PricingPlans: React.FC = () => {
       seats: "(6+ seats)",
       description: "Best for large organizations",
       options: [
-        { name: "Either HR or TA agent", monthly: "29", annual: "290", addTrainingMonthly: "8.95", addTrainingAnnual: "89.50" },
-        { name: "HR & TA agent", monthly: "49", annual: "490", addTrainingMonthly: "8.95", addTrainingAnnual: "89.50" },
-        { name: "Training Only", monthly: "8.95", annual: "89.50" },
+        {
+          name: "Either HR or TA agent",
+          monthly: "29",
+          annual: "290",
+          addTrainingMonthly: "8.95",
+          addTrainingAnnual: "89.50",
+        },
+        {
+          name: "HR & TA agent",
+          monthly: "49",
+          annual: "490",
+          addTrainingMonthly: "8.95",
+          addTrainingAnnual: "89.50",
+        },
+        // { name: "Training Only", monthly: "8.95", annual: "89.50" },
       ],
     },
   ];
@@ -182,9 +253,12 @@ export const PricingPlans: React.FC = () => {
                 Integrations
               </li>
             </ul>
-            <button className="px-8 py-4 rounded-2xl font-bold bg-[#8A7DE6] text-white hover:bg-[#6366f1] transition-all border border-[#8A7DE6]">
+            <Link
+              to="mailto:craig@talentflexx.com"
+              className="px-8 py-4 rounded-2xl font-bold bg-[#8A7DE6] text-white hover:bg-[#6366f1] transition-all border border-[#8A7DE6]"
+            >
               Contact Us
-            </button>
+            </Link>
           </div>
         </div>
       </div>

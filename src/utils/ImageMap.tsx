@@ -14,7 +14,7 @@ const HOTSPOTS = [
     coords: [10, 55, 155, 320],
     label: "Agent",
     description:
-      "Our AI agent handles customer conversations 24/7, answering queries, qualifying leads, and automating repetitive tasks so your team can focus on what matters.",
+      "A cost-effective TA or HR AI Assistant who learns from you, to be like you, and helps take away all the boring admin and repetition. Freeing you up to work on the human-led tasks.",
   },
   {
     id: "rocket",
@@ -28,9 +28,9 @@ const HOTSPOTS = [
     id: "audit",
     shape: "rect" as const,
     coords: [268, 228, 510, 410],
-    label: "Audit / Consult",
+    label: "Consult",
     description:
-      "We review your existing workflows and AI setup, identify gaps, and provide expert consulting to optimise performance and ensure responsible AI usage.",
+      "We will assess your AI readiness and make recommendations on how AI & Automation can improve your function adding real value to your business.",
   },
   {
     id: "train",
@@ -38,7 +38,7 @@ const HOTSPOTS = [
     coords: [625, 55, 775, 320],
     label: "Train",
     description:
-      "Empower your team with hands-on AI training programmes tailored to your industry — from foundational literacy to advanced prompt engineering.",
+      "Your team needs the skills to use AI effectively and to train others in your workplace. We will tailor a training plan to suit your needs.",
   },
 ];
 
@@ -132,10 +132,12 @@ export default function SolutionsImageMap() {
     if (tooltipLeft < margin) {
       adjustedX = margin - containerLeft - clickX + tooltipWidth / 2;
     } else if (tooltipRight > viewportWidth - margin) {
-      adjustedX = viewportWidth - margin - containerLeft - clickX - tooltipWidth / 2;
+      adjustedX =
+        viewportWidth - margin - containerLeft - clickX - tooltipWidth / 2;
     }
 
-    const tooltipTop = containerTop + adjustedY - tooltipPadding - tooltipHeight - margin;
+    const tooltipTop =
+      containerTop + adjustedY - tooltipPadding - tooltipHeight - margin;
     if (tooltipTop < margin) {
       flipVertical = true;
       adjustedY = clickY + tooltipPadding + margin;
@@ -221,8 +223,12 @@ export default function SolutionsImageMap() {
                 height: 0,
                 borderLeft: "8px solid transparent",
                 borderRight: "8px solid transparent",
-                borderTop: tooltipPos.flipVertical ? "8px solid transparent" : "8px solid #fff",
-                borderBottom: tooltipPos.flipVertical ? "8px solid #fff" : "8px solid transparent",
+                borderTop: tooltipPos.flipVertical
+                  ? "8px solid transparent"
+                  : "8px solid #fff",
+                borderBottom: tooltipPos.flipVertical
+                  ? "8px solid #fff"
+                  : "8px solid transparent",
               }}
             />
             {/* Border arrow */}
@@ -237,8 +243,12 @@ export default function SolutionsImageMap() {
                 height: 0,
                 borderLeft: "9px solid transparent",
                 borderRight: "9px solid transparent",
-                borderTop: tooltipPos.flipVertical ? "9px solid transparent" : "9px solid #e5e7eb",
-                borderBottom: tooltipPos.flipVertical ? "9px solid #e5e7eb" : "9px solid transparent",
+                borderTop: tooltipPos.flipVertical
+                  ? "9px solid transparent"
+                  : "9px solid #e5e7eb",
+                borderBottom: tooltipPos.flipVertical
+                  ? "9px solid #e5e7eb"
+                  : "9px solid transparent",
                 zIndex: -1,
               }}
             />

@@ -1,7 +1,9 @@
 import { FaArrowRight } from "react-icons/fa6";
 import Navbar from "./Navbar";
+import { useNavigate } from "react-router";
 
 export default function Hero() {
+  const navigate = useNavigate();
   return (
     <div className="bg-[url('/heroBg.svg')] w-full h-screen bg-no-repeat bg-cover flex flex-col">
       {/* ----- Navbar (fixed height) ----- */}
@@ -15,23 +17,23 @@ export default function Hero() {
             <div className="gap-0">
               <div className="">
                 <div>
-                  <p className=" text-[1rem] md:text-xl font-open-san text-text-2nd ">
+                  {/* <p className=" text-[1rem] md:text-xl font-open-san text-text-2nd ">
                     People Orbit AI
-                  </p>
+                  </p> */}
                   <h1 className="text-4xl md:text-[4rem] font-bold text-title-2nd hidden md:static">
-                    Audit. Training. Agents.
+                    The Future of AI for TA & HR is Here
                   </h1>
                 </div>
                 <div>
                   <span className="text-4xl md:text-[4rem] font-bold text-main hidden md:static">
-                    AI for HR & TA
+                    Consult. Train. Agents.
                   </span>
                 </div>
                 <div>
                   <h1 className="text-4xl md:text-[4rem] font-bold text-title-2nd">
-                    Audit. Training. Agents.{" "}
+                    The Future of AI for TA & HR is Here{" "}
                     <span className="text-4xl md:text-[4rem] font-bold text-main">
-                      AI for HR & TA
+                      Consult. Train. Agents.
                     </span>
                   </h1>
                 </div>
@@ -46,13 +48,19 @@ export default function Hero() {
                 />
               </div>
               <p className="text-[1rem] text-text-2nd w-full md:w-[50%]">
-                Your complete AI solution for the HR, L&D, TA and recruitment
-                Industries. We act as your eyes, ears and assistants - every
-                step of the way.
+                AI is already changing the way we work. Are you ready to change
+                the way you work? People Orbit AI will supercharge your TA & HR
+                function for the realities of AI, adding real value to your
+                business and your function.
               </p>
             </div>
 
-            <button className="flex items-center gap-2 w-fit bg-main px-6 py-3 rounded-full  hover:cursor-pointer transition text-white">
+            <button
+              onClick={() => {
+                navigate("/auth/signup");
+              }}
+              className="flex items-center gap-2 w-fit bg-main px-6 py-3 rounded-full  hover:cursor-pointer transition text-white"
+            >
               <span className="text-lg">Get Started Now</span>
               <span className="bg-main-dark p-2 rounded-full">
                 <FaArrowRight size={18} />

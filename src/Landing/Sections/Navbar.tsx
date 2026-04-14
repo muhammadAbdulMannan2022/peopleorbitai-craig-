@@ -110,7 +110,7 @@ const Navbar = () => {
   /* -------------------------------------------------------------- */
   const NavLink = ({ id, label }: { id: string; label: string }) => {
     const isHome = id === "home";
-    
+
     return (
       <Link
         to={isHome ? "/" : `#${id}`}
@@ -140,7 +140,7 @@ const Navbar = () => {
           <div className="flex justify-between items-center h-16">
             {/* LOGO */}
             <Link to="/" className="flex items-center">
-              <img src="/logo.svg" className="h-8" alt="Logo" />
+              <img src="/logo.png" className="h-10" alt="Logo" />
             </Link>
 
             {/* DESKTOP: LINKS & BUTTONS */}
@@ -206,7 +206,7 @@ const Navbar = () => {
               {/* Logo in drawer */}
               <div>
                 <div className="flex items-center">
-                  <img src="/logo.svg" className="h-8" alt="Logo" />
+                  <img src="/logo.png" className="h-8" alt="Logo" />
                 </div>
 
                 {/* Mobile Links */}

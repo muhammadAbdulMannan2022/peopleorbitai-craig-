@@ -36,7 +36,7 @@ export const Header: React.FC<HeaderProps> = ({
       <div className="h-[calc(5rem-0.375rem)] border-b border-gray-100 flex items-center justify-between px-6 md:px-12">
         {/* Left */}
         <div className="flex items-center gap-4">
-          <img src="/logo.svg" className="h-8 md:h-10" alt="" />
+          <img src="/logo.png" className="h-8 md:h-10" alt="" />
         </div>
 
         {/* Right */}

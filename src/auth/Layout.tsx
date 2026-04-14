@@ -18,7 +18,7 @@ export default function Layout() {
       <div className="hidden md:flex md:w-1/2 sticky top-0 h-screen border-r border-gray-200">
         <div className="w-full h-full flex items-center justify-center relative overflow-hidden">
           <div className="absolute top-[5%] left-0 z-10 bg-white/50 backdrop-blur-xs px-5 py-3 rounded-e-full">
-            <img className="h-10" src="/logo.svg" alt="" />
+            <img className="h-10" src="/logo.png" alt="" />
           </div>
           <img
             src="/auth.jpg"

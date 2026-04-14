@@ -1,5 +1,5 @@
 import React from "react";
-import { ChevronLeft, CheckCircle2, Plus } from "lucide-react";
+import { ChevronLeft, CheckCircle2 } from "lucide-react";
 import { useNavigate } from "react-router";
 
 interface PlanOption {
@@ -68,18 +68,25 @@ const PricingTierCard: React.FC<PricingTier> = ({
         </div>
 
         <div className="text-3xl font-black mt-4">
-          From ${isAnnual 
-            ? options.reduce((sum, opt) => {
-                const base = opt.annual;
-                const training = opt.addTraining ? opt.addTraining.annual : 0;
-                return sum + base + training;
-              }, 0).toFixed(2)
-            : options.reduce((sum, opt) => {
-                const base = opt.monthly;
-                const training = opt.addTraining ? opt.addTraining.monthly : 0;
-                return sum + base + training;
-              }, 0).toFixed(2)
-          }{perSeat ? "/seat" : `/${isAnnual ? "yr" : "mo"}`}
+          From $
+          {isAnnual
+            ? options
+                .reduce((sum, opt) => {
+                  const base = opt.annual;
+                  const training = opt.addTraining ? opt.addTraining.annual : 0;
+                  return sum + base + training;
+                }, 0)
+                .toFixed(2)
+            : options
+                .reduce((sum, opt) => {
+                  const base = opt.monthly;
+                  const training = opt.addTraining
+                    ? opt.addTraining.monthly
+                    : 0;
+                  return sum + base + training;
+                }, 0)
+                .toFixed(2)}
+          {perSeat ? "/seat" : `/${isAnnual ? "yr" : "mo"}`}
         </div>
       </div>
 
@@ -112,7 +119,7 @@ const PricingTierCard: React.FC<PricingTier> = ({
                     </span>
                   </div>
                 </div>
-
+                {/* 
                 {option.addTraining && (
                   <div className="text-xs text-gray-500 flex items-center gap-1">
                     <Plus size={12} />
@@ -122,7 +129,7 @@ const PricingTierCard: React.FC<PricingTier> = ({
                       : option.addTraining.monthly}
                     {perSeat ? "/seat" : `/${isAnnual ? "yr" : "mo"}`}
                   </div>
-                )}
+                )} */}
 
                 {idx === 1 && (
                   <div className="text-xs text-green-600 mt-2 font-medium">
@@ -182,11 +189,11 @@ const PricingPlans: React.FC = () => {
             annual: 99.5,
           },
         },
-        {
-          name: "Training Only",
-          monthly: 9.95,
-          annual: 99.5,
-        },
+        // {
+        //   name: "Training Only",
+        //   monthly: 9.95,
+        //   annual: 99.5,
+        // },
       ],
     },
     {
@@ -213,11 +220,11 @@ const PricingPlans: React.FC = () => {
             annual: 399.5,
           },
         },
-        {
-          name: "Training Only",
-          monthly: 39.95,
-          annual: 399.5,
-        },
+        // {
+        //   name: "Training Only",
+        //   monthly: 39.95,
+        //   annual: 399.5,
+        // },
       ],
     },
     {
@@ -244,11 +251,11 @@ const PricingPlans: React.FC = () => {
             annual: 89.5,
           },
         },
-        {
-          name: "Training Only",
-          monthly: 8.95,
-          annual: 89.5,
-        },
+        // {
+        //   name: "Training Only",
+        //   monthly: 8.95,
+        //   annual: 89.5,
+        // },
       ],
     },
   ];

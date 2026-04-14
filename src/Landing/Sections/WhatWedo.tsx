@@ -29,13 +29,15 @@ const WhatWedo: React.FC = () => {
       <div className="max-w-5xl mx-auto flex flex-col items-center">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-[#2F327D] mb-6">
-            What Does <span className="text-[#6C5CE7]">PeopleOrbitAI</span> Do?
+            What can <span className="text-[#6C5CE7]">PeopleOrbitAI</span> Do
+            For You??
           </h2>
           <p className="text-gray-500 text-lg md:text-xl max-w-4xl leading-relaxed">
-            PeopleOrbitAI turns AI into outcomes for HR, L&D, Talent Acquisition
-            and Recruitment. Audit for clarity, Train for capability, and employ
-            Agents for efficiency—customised, secure, and ready to support your
-            function. Subscription or customisation – the choice is yours.
+            PeopleOrbitAI helps you turn AI into outcomes, by understanding your
+            ‘AI Readiness and setting you on the road to success. We Consult for
+            Clarity, Train for Capability and Employ Agents for Efficiency.
+            Every function and every business has different needs. Allow
+            PeopleOrbitAI to unlock your AI toolkit.
           </p>
         </div>
 
@@ -72,15 +74,20 @@ const WhatWedo: React.FC = () => {
             onClick={toggleVideo}
           >
             {!isPlaying && (
-              <button
-                // onClick={toggleVideo}
-                className="w-20 h-20 hover:cursor-pointer bg-white/90 rounded-full flex items-center justify-center shadow-lg transform hover:scale-110 transition-transform pointer-events-auto"
-              >
-                <Play
-                  className="text-[#FF4D4D] fill-[#FF4D4D] ml-1"
-                  size={32}
-                />
-              </button>
+              <>
+                <h1 className="absolute top-8 text-4xl font-bold text-white">
+                  Partnering with PeopleOrbitAI
+                </h1>
+                <button
+                  // onClick={toggleVideo}
+                  className="w-20 h-20 hover:cursor-pointer bg-white/90 rounded-full flex items-center justify-center shadow-lg transform hover:scale-110 transition-transform pointer-events-auto"
+                >
+                  <Play
+                    className="text-[#FF4D4D] fill-[#FF4D4D] ml-1"
+                    size={32}
+                  />
+                </button>
+              </>
             )}
           </div>
 

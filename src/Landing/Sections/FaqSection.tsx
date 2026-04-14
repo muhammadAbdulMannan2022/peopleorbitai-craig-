@@ -111,7 +111,10 @@ export const FAQSection: React.FC = () => {
   const rightColumnFaqs = faqs.slice(half);
 
   return (
-    <section className="py-24 px-6 md:px-16 bg-[#fafafa] bg-[url('/faqbg.png')] bg-cover bg-center">
+    <section
+      id="faq"
+      className="py-24 px-6 md:px-16 bg-[#fafafa] bg-[url('/faqbg.png')] bg-cover bg-center"
+    >
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-20">

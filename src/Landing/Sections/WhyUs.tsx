@@ -1,8 +1,7 @@
 import React from "react";
-import { BoxSelect, Waves, Map } from "lucide-react";
 
 interface FeatureCardProps {
-  icon: React.ReactNode;
+  icon: string;
   iconBg: string;
   title: string;
   description: string;
@@ -18,7 +17,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
     <div
       className={`${iconBg} w-12 h-12 md:w-16 md:h-16 shrink-0 rounded-3xl flex items-center justify-center text-white shadow-lg`}
     >
-      {icon}
+      <img src={icon} alt={title} />
     </div>
     <div className="flex flex-col text-center md:text-left">
       <h3 className="text-title-2nd font-extrabold text-2xl mb-3 opacity-90">
@@ -34,21 +33,21 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
 export const WhyChooseUs: React.FC = () => {
   const features = [
     {
-      icon: <BoxSelect size={32} />,
+      icon: "/audit.jpeg",
       iconBg: "bg-[#7db343]",
-      title: "Expertise in AI Audit & Consulting",
+      title: "Expertise in AI Consulting",
       description:
         "We will assess your AI-readiness and provide a clear and achievable roadmap to ensure you are benefitting from the AI revolution.",
     },
     {
-      icon: <Waves size={32} />,
+      icon: "/agent.jpeg",
       iconBg: "bg-[#4db6ac]",
-      title: "AI Micro-Learning for your Team",
+      title: "AI Training for your entire Team",
       description:
         "How can you make the most of AI if you don’t understand what you’re doing? PeopleOrbit is here to help with guided learning and actionable outcomes.",
     },
     {
-      icon: <Map size={32} />,
+      icon: "/train.jpeg",
       iconBg: "bg-[#9575cd]",
       title: "AI Agents who assist you with what you need",
       description:
@@ -62,13 +61,13 @@ export const WhyChooseUs: React.FC = () => {
         {/* Header */}
         <div className="mb-16 md:mb-20">
           <span className="text-text-2nd font-medium text-lg tracking-normal mb-4 block">
-            Easy and Fast response
+            Easy & Fast
           </span>
           <h2 className="text-6xl md:text-7xl font-black text-title-2nd mb-6 tracking-tight">
             Why Choose Us
           </h2>
           <p className="text-text-2nd text-xl">
-            We are the AI experts for HR/L&D and TA/Recruitment
+            We are the AI experts for TA & HR.
           </p>
         </div>
 
@@ -87,7 +86,7 @@ export const WhyChooseUs: React.FC = () => {
           </div>
           <div className="flex-1 md:w-1/2 w-full mt-5 md:mt-0 flex justify-end">
             <img
-              src="/whyus.png"
+              src="/hwimg.png"
               alt="why us"
               className="w-full h-auto md:w-[80%]"
             />
