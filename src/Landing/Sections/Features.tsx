@@ -60,7 +60,10 @@ const AgentCard: React.FC<{ agent: Agent }> = ({ agent }) => (
 
 export const FeatureSection: React.FC = () => {
   return (
-    <div className="max-w-7xl mx-auto px-6 md:px-16 py-12 lg:py-24">
+    <div
+      id="features"
+      className="max-w-7xl mx-auto px-6 md:px-16 py-12 lg:py-24"
+    >
       {/* Section Header */}
       <div className="text-center mb-16 md:mb-24">
         <h2 className="text-4xl md:text-5xl font-extrabold text-title-2nd mb-4">

@@ -21,7 +21,7 @@ export const Footer: React.FC = () => {
             <ul className="flex flex-col gap-4">
               <li>
                 <Link
-                  to="/features"
+                  to="/#features"
                   className="text-[#64748b] hover:text-[#818cf8] transition-colors"
                 >
                   Features
@@ -29,7 +29,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <Link
-                  to="/pricing"
+                  to="/#pricing"
                   className="text-[#64748b] hover:text-[#818cf8] transition-colors"
                 >
                   Pricing
@@ -37,7 +37,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <Link
-                  to="/login"
+                  to="/auth/login"
                   className="text-[#64748b] hover:text-[#818cf8] transition-colors"
                 >
                   Login

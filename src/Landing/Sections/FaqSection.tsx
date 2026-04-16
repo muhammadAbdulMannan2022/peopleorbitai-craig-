@@ -60,17 +60,18 @@ export const FAQSection: React.FC = () => {
     {
       question: "What does PeopleOrbitAI actually do?",
       answer:
-        "We help HR and TA teams turn AI into outcomes: we audit your current state, train your people with practical micro-learning, and deploy personal AI agents (Finn & Nell) that produce ready-to-use work—safely and at speed.",
+        "We help TA and HR teams turn AI into outcomes: we consult on your current state, train your people, and deploy personal AI agents (Finn & Nell) that produce ready-to-use work safely and at speed.",
     },
     {
       question: "Which parts are subscription-based?",
       answer:
-        "AI Training and AI Agents are offered on subscription plans with tiered usage and team options. Our AI Audit & Consulting is a scoped project (fixed-fee or milestone-based) to set your roadmap before you scale.",
+        "AI Agents are offered on subscription plans with tiered usage and team options. Our AI Consulting is a scoped project (fixed-fee or milestone-based) to set your roadmap before you scale. Our AI Training is tailored to your needs.",
     },
     {
-      question: "Do we need the AI Audit before buying training or agents?",
+      question:
+        "Do we need the AI-Readiness Consult before investing in training or agents?",
       answer:
-        "Strongly recommended. The audit benchmarks your AI-readiness, clarifies risks, and sequences quick wins—so training and agents land cleanly, with governance and ROI baked in. If timing's tight, we can run a mini-assessment first.",
+        "Strongly recommended. The AI audit benchmarks your AI-readiness, clarifies risks, and sequences quick wins so training and agents land cleanly, with governance and ROI baked in. If timing is tight, we can run a mini-assessment first.",
     },
     {
       question: "Can we customise our training and agents?",
@@ -78,29 +79,29 @@ export const FAQSection: React.FC = () => {
         "Yes, please reach out directly to discuss your needs and we can put together a solution that works.",
     },
     {
-      question: "How long does onboarding take?",
+      question: "How long does agent onboarding take?",
       answer:
         "Most teams go live in 2–4 weeks: week 1 for setup and guardrails, weeks 2–3 for pilot training and templates, then expand users and use-cases. We keep it lightweight and aligned to your BAU rhythms.",
     },
     {
       question: "Is our data secure and compliant?",
       answer:
-        "Yes. We operate with strong privacy controls, role-based access, and audit trails, aligned to Australian Privacy Principles and enterprise expectations. You retain ownership of your data and outputs; we don't use your content to train public models.",
+        "Yes. We operate with strong privacy controls, role-based access, and audit trails, aligned to Australian Privacy Principles and enterprise expectations. You retain ownership of your data and outputs; we don’t use your content to train public models.",
     },
     {
       question: "How do Finn (HR) and Nell (TA) fit into our workflow?",
       answer:
-        "They sit beside your team to draft policies, letters, JDs, ads, interview guides, Boolean searches and comms—then file, format, and follow your templates. They learn your tone and cut admin, not corners.",
+        "They sit beside your team to draft policies, letters, JDs, ads, interview guides, Boolean searches, and communications—then file, format, and follow your templates. They learn your tone and cut admin, not corners.",
     },
     {
       question: "How is pricing structured?",
       answer:
-        "Subscriptions are tiered for team size and usage, with discounts for annual commitments. The audit is a separate project fee. We'll recommend the leanest plan that meets your outcomes (no gold-plating).",
+        "Subscriptions are tiered for team size and usage, with discounts for annual commitments. The Consult & Training is a separate project fee. We’ll recommend the leanest plan that meets your outcomes.",
     },
     {
       question: "What support do we get?",
       answer:
-        "You'll have access to a customer success lead, help centre, and prompt clinics. For larger teams, we include admin enablement, quarterly optimisation reviews, and optional SLAs for faster response times.",
+        "You’ll have access to customer success, a help centre, and prompt clinics. For larger teams, we include admin enablement, quarterly optimisation reviews, and optional SLAs for faster response times.",
     },
   ];
   const [openIndex, setOpenIndex] = useState<number | null>(faqs.length - 1);

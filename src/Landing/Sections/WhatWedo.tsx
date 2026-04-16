@@ -91,9 +91,17 @@ const WhatWedo: React.FC = () => {
   };
 
   return (
-    <section className="bg-[#f7f7fa] py-16 px-6">
-      <div className="max-w-5xl mx-auto flex flex-col items-center">
-        {/* ... Video Section remains same as previous ... */}
+    <section className="bg-[#f7f7fa] py-24 px-6">
+      <div className="max-w-5xl mx-auto flex flex-col items-center pt-12">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold text-[#2F327D] mb-6">
+            What can <span className="text-[#6C5CE7]">PeopleOrbitAI</span> Do
+            For You??
+          </h2>
+          <p className="text-gray-500 text-lg md:text-xl max-w-4xl leading-relaxed">
+            PeopleOrbitAI helps you turn AI into outcomes...
+          </p>
+        </div>
         <div
           className="relative w-full max-w-4xl aspect-video rounded-3xl overflow-hidden shadow-2xl mb-20 bg-black"
           onMouseEnter={() => setShowControls(true)}

@@ -4,7 +4,8 @@ import { Footer } from "./Sections/Footer";
 import Hero from "./Sections/Hero";
 import { HowItWorks } from "./Sections/HowItWorks";
 import { PricingPlans } from "./Sections/PricingPlan";
-import { TestimonialSection } from "./Sections/Testimonials";
+import MarqueeSection from "./Sections/Testimonials";
+
 import WhatWedo from "./Sections/WhatWedo";
 import { WhyChooseUs } from "./Sections/WhyUs";
 
@@ -17,7 +18,7 @@ export default function Landing() {
       <HowItWorks />
       <WhyChooseUs />
       <PricingPlans />
-      <TestimonialSection />
+      <MarqueeSection />
       <FAQSection />
       <Footer />
     </div>

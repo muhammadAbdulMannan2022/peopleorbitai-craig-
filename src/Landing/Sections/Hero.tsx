@@ -71,7 +71,7 @@ export default function Hero() {
           {/* ----- Right column (hero image) ----- */}
           <div className="flex items-center md:justify-end  w-full md:w-1/2 ">
             <img
-              src="/heroImg.svg"
+              src="/heroImg.png"
               alt="Hero illustration"
               className="max-w-full w-full h-auto md:-mr-12"
             />
