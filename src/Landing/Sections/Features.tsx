@@ -77,7 +77,7 @@ export const FeatureSection: React.FC = () => {
         <div className="flex flex-col gap-8 h-full">
           <div className="relative group overflow-hidden rounded-3xl shadow-xl grow w-full max-h-96">
             <img
-              src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=1000"
+              src="/Consulting.png"
               alt="Expert Design Team"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 min-h-[400px] max-h-36"
             />

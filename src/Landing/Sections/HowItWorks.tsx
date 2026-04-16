@@ -61,7 +61,7 @@ export const HowItWorks: React.FC = () => {
           <img
             src="1.png"
             alt=""
-            className="absolute w-[25%] hidden md:block -bottom-5 -left-[15%]"
+            className="absolute w-[25%] hidden md:block -bottom-5 -left-[15%] z-40"
           />
 
           <div className="flex flex-row justify-between items-start z-10 w-full ">
@@ -108,7 +108,7 @@ export const HowItWorks: React.FC = () => {
           <img
             src="2.png"
             alt=""
-            className="absolute w-[25%] hidden md:block -bottom-5 -right-[15%]"
+            className="absolute w-[25%] hidden md:block -bottom-5 -right-[15%] z-40"
           />
         </div>
 
