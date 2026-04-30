@@ -7,16 +7,16 @@ import { RiExchangeDollarLine } from "react-icons/ri";
 const agentsData = [
   {
     id: 1,
-    name: "Liono",
-    title: "Recruitment & Talent Acquisition",
+    name: "Finn",
+    title: "HR Agent",
     avatar: "/bot1.png",
     description:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
   },
   {
     id: 2,
-    name: "Romono",
-    title: "HR Agent",
+    name: "Nall",
+    title: "Talent Acquisition",
     avatar: "/bot2.png",
     description:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",

@@ -37,11 +37,7 @@ const PricingTierCard: React.FC<PricingTier> = ({
         isFeatured ? "border-[#777CDC]" : "border-gray-100"
       }`}
     >
-      <div
-        className={`pt-10 pb-6 px-8 text-center ${
-          isFeatured ? "bg-main text-white" : "bg-[#464E5F] text-white"
-        }`}
-      >
+      <div className={`pt-10 pb-6 px-8 text-center bg-main text-white`}>
         <h3 className="text-2xl font-black mb-1">{title}</h3>
         <p className="text-white/80 text-sm mb-4">
           {seats} {typeof seats === "number" ? "seat" : "seats"}
@@ -148,11 +144,7 @@ const PricingTierCard: React.FC<PricingTier> = ({
           </div>
 
           <button
-            className={`w-full py-4 rounded-xl font-bold transition-all ${
-              isFeatured
-                ? "bg-main text-white hover:bg-main/90"
-                : "bg-[#464E5F] text-white hover:bg-[#363D4F]"
-            }`}
+            className={`w-full py-4 rounded-xl font-bold transition-all bg-main text-white hover:bg-main/90 hover:cursor-pointer`}
           >
             {isFeatured ? "Upgrade Now" : "Get Started"}
           </button>
