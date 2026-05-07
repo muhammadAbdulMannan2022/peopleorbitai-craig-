@@ -16,14 +16,14 @@ interface FeatureContent {
 const AGENTS: Agent[] = [
   {
     id: "1",
-    name: "AI consultant",
+    name: "Consult",
 
     description:
       "We run an AI-Readiness diagnostic to assess your AI-readiness score. We map processes, systems, tech and people and look for efficiencies & opportunities to embrace automation. ",
   },
   {
     id: "2",
-    name: "AI Train",
+    name: "Train",
 
     description:
       "We train your entire team on AI effectiveness and how to implement AI tools and processes. Every business has different needs and we will tailor a training package to suit you.",
@@ -31,7 +31,7 @@ const AGENTS: Agent[] = [
 ];
 
 const MAIN_CONTENT: FeatureContent = {
-  title: "Most TA & HR functions, simply aren’t ready for AI –are you?",
+  title: "Most TA & HR functions simply aren’t ready for AI… Are You?",
   body: "We are smack bang in the middle of the biggest change to the way we work since the industrial revolution. Most people are asking how can we recruit differently, more efficiently while still remaining people-focused... It’s difficult, but PeopleOrbitAI will cut through the BS and set you up for success. ",
 };
 
@@ -70,7 +70,7 @@ export const FeatureSection: React.FC = () => {
           AI Readines
         </h2>
         <p className="text-gray-500 max-w-2xl mx-auto text-lg">
-          Embracing Automation to ImproveTA & HR
+          Embracing Automation to Improve TA & HR
         </p>
       </div>
 

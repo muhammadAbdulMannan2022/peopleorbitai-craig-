@@ -1,9 +1,7 @@
 import { FaArrowRight } from "react-icons/fa6";
 import Navbar from "./Navbar";
-import { useNavigate } from "react-router";
 
 export default function Hero() {
-  const navigate = useNavigate();
   return (
     <div className="bg-[url('/heroBg.svg')] w-full h-screen bg-no-repeat bg-cover flex flex-col">
       {/* ----- Navbar (fixed height) ----- */}
@@ -49,19 +47,19 @@ export default function Hero() {
               </div>
               <p className="text-[1rem] text-text-2nd w-full md:w-[50%]">
                 AI is already changing the way we work. Are you ready to change
-                the way you work? People Orbit AI will supercharge your TA & HR
-                function for the realities of AI, adding real value to your
-                business and your function.
+                the way you work? <br /> People Orbit AI will supercharge your
+                TA & HR function for the realities of AI, adding real value to
+                your business and your function.
               </p>
             </div>
 
             <button
               onClick={() => {
-                navigate("/auth/signup");
+                window.location.href = "mailto:info@peopleorbitai.com";
               }}
               className="flex items-center gap-2 w-fit bg-main px-6 py-3 rounded-full  hover:cursor-pointer transition text-white"
             >
-              <span className="text-lg">Get Started Now</span>
+              <span className="text-lg">Contact us</span>
               <span className="bg-main-dark p-2 rounded-full">
                 <FaArrowRight size={18} />
               </span>

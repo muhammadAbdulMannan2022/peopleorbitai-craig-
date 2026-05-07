@@ -12,6 +12,8 @@ import Chat from "../Dashboard/pages/Chat";
 import Profile from "../Dashboard/pages/Profile";
 import PricingPlans from "../Dashboard/pages/Priceing";
 import PrivacyPolicy from "../Landing/Pages/PrivacyPolicy";
+import Blog from "../Landing/Pages/Blog";
+import BlogDetails from "../Landing/Pages/BlogDetails";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +27,14 @@ const router = createBrowserRouter([
       {
         path: "/privacy-policy",
         element: <PrivacyPolicy />,
+      },
+      {
+        path: "/articles",
+        element: <Blog />,
+      },
+      {
+        path: "/articles/:id",
+        element: <BlogDetails />,
       },
       {
         path: "/auth",

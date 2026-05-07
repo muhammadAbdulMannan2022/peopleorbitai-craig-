@@ -60,9 +60,7 @@ export const WhyChooseUs: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-16 md:mb-20">
-          <span className="text-text-2nd font-medium text-lg tracking-normal mb-4 block">
-            Easy & Fast
-          </span>
+
           <h2 className="text-6xl md:text-7xl font-black text-title-2nd mb-6 tracking-tight">
             Why Choose Us
           </h2>

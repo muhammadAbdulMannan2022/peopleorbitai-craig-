@@ -2,16 +2,10 @@ import React, { useRef, useState, useEffect } from "react";
 import { Pause, Play, Volume2, VolumeX } from "lucide-react";
 
 const HOTSPOTS = [
-  {
-    id: "agent",
-    label: "Agent",
-    img: "/agent.png",
-    description:
-      "A cost-effective TA or HR AI Assistant who learns from you, to be like you, and helps take away all the boring admin and repetition. Freeing you up to work on the human-led tasks.",
-  },
+
   {
     id: "audit",
-    img: "/audit.png",
+    img: "/agent.png",
     label: "Consult",
     description:
       "We will assess your AI readiness and make recommendations on how AI & Automation can improve your function adding real value to your business.",
@@ -22,6 +16,13 @@ const HOTSPOTS = [
     label: "Train",
     description:
       "Your team needs the skills to use AI effectively and to train others in your workplace. We will tailor a training plan to suit your needs.",
+  },
+  {
+    id: "agent",
+    label: "Agent",
+    img: "/audit.png",
+    description:
+      "A cost-effective TA or HR AI Assistant who learns from you, to be like you, and helps take away all the boring admin and repetition. Freeing you up to work on the human-led tasks.",
   },
 ];
 

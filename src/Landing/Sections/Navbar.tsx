@@ -33,6 +33,14 @@ const Navbar = () => {
     const hash = location.hash.slice(1);
 
     const timer = setTimeout(() => {
+      if (location.pathname !== "/") {
+        if (location.pathname.startsWith("/articles")) {
+          setActiveId("articles");
+        } else {
+          setActiveId("");
+        }
+        return;
+      }
       if (hash && sections.includes(hash)) {
         scrollToId(hash);
         setActiveId(hash);
@@ -50,6 +58,15 @@ const Navbar = () => {
   /*  2. Track active section on scroll                            */
   /* -------------------------------------------------------------- */
   const handleScroll = useCallback(() => {
+    if (location.pathname !== "/") {
+      if (location.pathname.startsWith("/articles")) {
+        setActiveId("articles");
+      } else {
+        setActiveId("");
+      }
+      return;
+    }
+
     const scrollY = window.scrollY;
 
     // If near top → Home is active
@@ -110,21 +127,23 @@ const Navbar = () => {
   /* -------------------------------------------------------------- */
   const NavLink = ({ id, label }: { id: string; label: string }) => {
     const isHome = id === "home";
+    const isActive = activeId === id;
 
     return (
       <Link
-        to={isHome ? "/" : `#${id}`}
+        to={isHome ? "/" : `/#${id}`}
         onClick={(e) => {
-          if (!isHome) {
-            e.preventDefault();
-            onLinkClick(id);
+          if (location.pathname === "/") {
+            if (!isHome) {
+              e.preventDefault();
+              onLinkClick(id);
+            }
           }
         }}
         className={`block transition-colors text-lg font-open-san 
-          ${
-            activeId === id
-              ? "text-main underline font-bold"
-              : "text-navNotActive hover:text-main"
+          ${isActive
+            ? "text-main underline font-bold"
+            : "text-navNotActive hover:text-main"
           }`}
       >
         {label}
@@ -135,7 +154,7 @@ const Navbar = () => {
   return (
     <>
       {/* ========================== NAVBAR ========================== */}
-      <nav className="pt-4 px-3 sticky top-0">
+      <nav className="pt-4 px-3 absolute w-full top-0 z-999999">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white shadow-xl rounded-full border border-[#E7E7F0]">
           <div className="flex justify-between items-center h-16">
             {/* LOGO */}
@@ -148,6 +167,14 @@ const Navbar = () => {
               <NavLink id="home" label="Home" />
               <NavLink id="pricing" label="Pricing" />
               <NavLink id="faq" label="FAQ" />
+              <Link 
+                to="/articles" 
+                className={`block transition-colors text-lg font-open-san ${
+                  activeId === "articles" ? "text-main underline font-bold" : "text-navNotActive hover:text-main"
+                }`}
+              >
+                Articles
+              </Link>
 
               <div className="flex items-center space-x-3">
                 <Link
@@ -184,11 +211,10 @@ const Navbar = () => {
 
         {/* ======================= MOBILE DRAWER ======================= */}
         <div
-          className={`fixed inset-0 z-50 md:hidden transition-opacity duration-300 ${
-            isOpen
-              ? "opacity-100 pointer-events-auto"
-              : "opacity-0 pointer-events-none"
-          }`}
+          className={`fixed inset-0 z-50 md:hidden transition-opacity duration-300 ${isOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
+            }`}
         >
           {/* Backdrop */}
           <div
@@ -198,9 +224,8 @@ const Navbar = () => {
 
           {/* Drawer Panel */}
           <div
-            className={`absolute right-0 top-0 h-full w-64 bg-white shadow-xl transform transition-transform duration-300 ${
-              isOpen ? "translate-x-0" : "translate-x-full"
-            }`}
+            className={`absolute right-0 top-0 h-full w-64 bg-white shadow-xl transform transition-transform duration-300 ${isOpen ? "translate-x-0" : "translate-x-full"
+              }`}
           >
             <div className="p-6 flex flex-col justify-between h-full">
               {/* Logo in drawer */}
@@ -214,6 +239,15 @@ const Navbar = () => {
                   <NavLink id="home" label="Home" />
                   <NavLink id="pricing" label="Pricing" />
                   <NavLink id="faq" label="FAQ" />
+                  <Link 
+                    to="/articles" 
+                    onClick={() => setIsOpen(false)} 
+                    className={`block transition-colors text-lg font-open-san ${
+                      activeId === "articles" ? "text-main underline font-bold" : "text-navNotActive hover:text-main"
+                    }`}
+                  >
+                    Articles
+                  </Link>
                 </nav>
               </div>
 

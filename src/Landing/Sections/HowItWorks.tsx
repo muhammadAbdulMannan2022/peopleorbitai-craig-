@@ -4,7 +4,7 @@ import { MousePointer2 } from "lucide-react";
 interface StepCardProps {
   step: number;
   title: string;
-  description: string;
+  description: React.ReactNode;
 }
 
 const StepCard: React.FC<StepCardProps> = ({ step, title, description }) => (
@@ -117,17 +117,29 @@ export const HowItWorks: React.FC = () => {
           <StepCard
             step={1}
             title="Sign Up"
-            description="Set up your account  For multiple users contact us directly and we can assign any number of seats for your team."
+            description={
+              <>
+                Set up your account.
+                <br />
+                For multiple users contact us directly and we can assign any number of seats for your team.
+              </>
+            }
           />
           <StepCard
             step={2}
             title="Subscribe"
-            description="Choose yourAgent or Agents based on your needs."
+            description="Choose your Agent or Agents based on your needs."
           />
           <StepCard
             step={3}
             title="Enjoy"
-            description=" Have immediate access to your dedicated AI Assistant. Train them to complete all the boring repetitive admin tasks that ruin your day!"
+            description={
+              <>
+                Have immediate access to your dedicated AI Assistant.
+                <br />
+                Train them to complete all the boring repetitive admin tasks that ruin your day!
+              </>
+            }
           />
         </div>
       </div>
