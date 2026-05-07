@@ -141,9 +141,10 @@ const Navbar = () => {
           }
         }}
         className={`block transition-colors text-lg font-open-san 
-          ${isActive
-            ? "text-main underline font-bold"
-            : "text-navNotActive hover:text-main"
+          ${
+            isActive
+              ? "text-main underline font-bold"
+              : "text-navNotActive hover:text-main"
           }`}
       >
         {label}
@@ -167,13 +168,15 @@ const Navbar = () => {
               <NavLink id="home" label="Home" />
               <NavLink id="pricing" label="Pricing" />
               <NavLink id="faq" label="FAQ" />
-              <Link 
-                to="/articles" 
+              <Link
+                to="/articles"
                 className={`block transition-colors text-lg font-open-san ${
-                  activeId === "articles" ? "text-main underline font-bold" : "text-navNotActive hover:text-main"
+                  activeId === "articles"
+                    ? "text-main underline font-bold"
+                    : "text-navNotActive hover:text-main"
                 }`}
               >
-                Articles
+                Resources
               </Link>
 
               <div className="flex items-center space-x-3">
@@ -211,10 +214,11 @@ const Navbar = () => {
 
         {/* ======================= MOBILE DRAWER ======================= */}
         <div
-          className={`fixed inset-0 z-50 md:hidden transition-opacity duration-300 ${isOpen
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
-            }`}
+          className={`fixed inset-0 z-50 md:hidden transition-opacity duration-300 ${
+            isOpen
+              ? "opacity-100 pointer-events-auto"
+              : "opacity-0 pointer-events-none"
+          }`}
         >
           {/* Backdrop */}
           <div
@@ -224,8 +228,9 @@ const Navbar = () => {
 
           {/* Drawer Panel */}
           <div
-            className={`absolute right-0 top-0 h-full w-64 bg-white shadow-xl transform transition-transform duration-300 ${isOpen ? "translate-x-0" : "translate-x-full"
-              }`}
+            className={`absolute right-0 top-0 h-full w-64 bg-white shadow-xl transform transition-transform duration-300 ${
+              isOpen ? "translate-x-0" : "translate-x-full"
+            }`}
           >
             <div className="p-6 flex flex-col justify-between h-full">
               {/* Logo in drawer */}
@@ -239,11 +244,13 @@ const Navbar = () => {
                   <NavLink id="home" label="Home" />
                   <NavLink id="pricing" label="Pricing" />
                   <NavLink id="faq" label="FAQ" />
-                  <Link 
-                    to="/articles" 
-                    onClick={() => setIsOpen(false)} 
+                  <Link
+                    to="/articles"
+                    onClick={() => setIsOpen(false)}
                     className={`block transition-colors text-lg font-open-san ${
-                      activeId === "articles" ? "text-main underline font-bold" : "text-navNotActive hover:text-main"
+                      activeId === "articles"
+                        ? "text-main underline font-bold"
+                        : "text-navNotActive hover:text-main"
                     }`}
                   >
                     Articles
