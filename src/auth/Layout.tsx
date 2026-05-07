@@ -36,7 +36,14 @@ export default function Layout() {
       </div>
 
       {/* Right Panel - Form */}
-      <div className="flex-1 flex flex-col w-full min-h-screen h-screen overflow-y-auto bg-white md:bg-transparent">
+      <div className="flex-1 flex flex-col w-full min-h-screen h-screen overflow-y-auto bg-white md:bg-transparent ">
+        <div className="flex items-center justify-center">
+          <img
+            src="/comingsoon.png"
+            alt="comming soon"
+            className="w-28 md:w-36 mt-6"
+          />
+        </div>
         <div className="flex-1 flex items-center justify-center p-6 md:p-12">
           <div className="w-full max-w-[440px] py-8">
             <Outlet />

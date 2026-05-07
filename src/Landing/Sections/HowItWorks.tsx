@@ -8,7 +8,7 @@ interface StepCardProps {
 }
 
 const StepCard: React.FC<StepCardProps> = ({ step, title, description }) => (
-  <div className="bg-white rounded-[2.5rem] p-10 shadow-xl shadow-gray-200/50 flex flex-col items-start text-left transition-transform hover:-translate-y-2 duration-300">
+  <div className="bg-white relative rounded-[2.5rem] p-10 shadow-xl shadow-gray-200/50 flex flex-col items-start text-left transition-transform hover:-translate-y-2 duration-300">
     <div className="bg-[#d85a36] w-14 h-14 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg shadow-orange-200">
       <MousePointer2 size={24} />
     </div>
@@ -17,6 +17,7 @@ const StepCard: React.FC<StepCardProps> = ({ step, title, description }) => (
     </span>
     <h3 className="text-[#1a1a2e] font-extrabold text-2xl mb-4">{title}</h3>
     <p className="text-gray-500 leading-relaxed text-base">{description}</p>
+    <img src="/comingsoon.png" className="absolute top-5 right-5 w-32" alt="" />
   </div>
 );
 
@@ -121,7 +122,8 @@ export const HowItWorks: React.FC = () => {
               <>
                 Set up your account.
                 <br />
-                For multiple users contact us directly and we can assign any number of seats for your team.
+                For multiple users contact us directly and we can assign any
+                number of seats for your team.
               </>
             }
           />
@@ -137,7 +139,8 @@ export const HowItWorks: React.FC = () => {
               <>
                 Have immediate access to your dedicated AI Assistant.
                 <br />
-                Train them to complete all the boring repetitive admin tasks that ruin your day!
+                Train them to complete all the boring repetitive admin tasks
+                that ruin your day!
               </>
             }
           />

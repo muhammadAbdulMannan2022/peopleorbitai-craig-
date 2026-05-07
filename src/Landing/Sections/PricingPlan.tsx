@@ -33,7 +33,12 @@ const PricingTierCard: React.FC<PricingTier> = ({
   const navigate = useNavigate();
 
   return (
-    <div className="bg-white rounded-[2.5rem] shadow-xl border border-gray-100 overflow-hidden">
+    <div className="bg-white rounded-[2.5rem] shadow-xl border border-gray-100 overflow-hidden relative">
+      <img
+        src="/comingsoon.png"
+        alt="comming soon"
+        className="absolute w-24 top-2 right-3"
+      />
       <div className="pt-10 pb-6 px-8 text-center bg-[#777CDC] text-white">
         <h3 className="text-2xl font-black mb-1">{title}</h3>
         <p className="text-white/80 text-sm mb-4">{seats}</p>
@@ -43,15 +48,17 @@ const PricingTierCard: React.FC<PricingTier> = ({
             <div className="flex justify-center bg-white/10 rounded-lg p-1 w-fit mx-auto">
               <button
                 onClick={() => setIsAnnual(false)}
-                className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${!isAnnual ? "bg-white text-[#777CDC]" : "text-white/70"
-                  }`}
+                className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
+                  !isAnnual ? "bg-white text-[#777CDC]" : "text-white/70"
+                }`}
               >
                 Monthly
               </button>
               <button
                 onClick={() => setIsAnnual(true)}
-                className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${isAnnual ? "bg-white text-[#777CDC]" : "text-white/70"
-                  }`}
+                className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
+                  isAnnual ? "bg-white text-[#777CDC]" : "text-white/70"
+                }`}
               >
                 Annual
               </button>
@@ -60,25 +67,31 @@ const PricingTierCard: React.FC<PricingTier> = ({
               From $
               {isAnnual
                 ? (
-                  parseFloat(options[0].annual.replace(/,/g, "")) +
-                  (options[0].addTrainingAnnual
-                    ? parseFloat(options[0].addTrainingAnnual.replace(/,/g, ""))
-                    : 0)
-                ).toFixed(2)
+                    parseFloat(options[0].annual.replace(/,/g, "")) +
+                    (options[0].addTrainingAnnual
+                      ? parseFloat(
+                          options[0].addTrainingAnnual.replace(/,/g, ""),
+                        )
+                      : 0)
+                  ).toFixed(2)
                 : (
-                  parseFloat(options[0].monthly) +
-                  (options[0].addTrainingMonthly
-                    ? parseFloat(options[0].addTrainingMonthly)
-                    : 0)
-                ).toFixed(2)}
+                    parseFloat(options[0].monthly) +
+                    (options[0].addTrainingMonthly
+                      ? parseFloat(options[0].addTrainingMonthly)
+                      : 0)
+                  ).toFixed(2)}
               /{isAnnual ? "yr" : "mo"}
             </div>
           </>
         )}
         {hidePricing && (
           <div className="h-[104px] flex flex-col items-center justify-center mt-2">
-            <span className="text-2xl font-black text-white">Custom Pricing</span>
-            <span className="text-sm text-white/80 mt-1">Tailored to your needs</span>
+            <span className="text-2xl font-black text-white">
+              Custom Pricing
+            </span>
+            <span className="text-sm text-white/80 mt-1">
+              Tailored to your needs
+            </span>
           </div>
         )}
       </div>
@@ -139,7 +152,7 @@ const PricingTierCard: React.FC<PricingTier> = ({
           <button
             onClick={() => {
               if (buttonLink) {
-                if (buttonLink.startsWith('mailto:')) {
+                if (buttonLink.startsWith("mailto:")) {
                   window.location.href = buttonLink;
                 } else {
                   navigate(buttonLink);
@@ -236,7 +249,7 @@ export const PricingPlans: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-20">
           <h2 className="text-5xl md:text-6xl font-black text-title-2nd mb-6 tracking-tight">
-            Our Pricing Plans
+            Our Agent Pricing Plans
           </h2>
           <p className="text-text-2nd text-lg max-w-xl mx-auto">
             Choose a plan that fits your needs, from monthly to annual options.
@@ -246,12 +259,21 @@ export const PricingPlans: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {tiers.map((tier, idx) => (
-            <PricingTierCard key={idx} {...tier} buttonLink="mailto:info@peopleorbitai.com" />
+            <PricingTierCard
+              key={idx}
+              {...tier}
+              buttonLink="mailto:info@peopleorbitai.com"
+            />
           ))}
         </div>
 
         <div className="mt-16 text-center">
-          <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 md:p-12 max-w-2xl mx-auto">
+          <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 md:p-12 max-w-2xl mx-auto relative">
+            <img
+              src="/comingsoon.png"
+              alt="comming soon"
+              className="absolute w-24 top-2 right-4"
+            />
             <h3 className="text-2xl md:text-3xl font-black text-title-2nd mb-4">
               Custom Agents
             </h3>
