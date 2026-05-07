@@ -38,7 +38,7 @@ export default function MarqueeSection() {
                 key={item.id}
                 src={item.logo}
                 alt={`company-logo-${item.id}`}
-                className="h-10 md:h-14 mx-10 object-contain opacity-70 hover:opacity-100 transition-all duration-300"
+                className="h-16 md:h-20 mx-10 object-contain opacity-70 hover:opacity-100 transition-all duration-300"
               />
             ))}
           </Marquee>
@@ -53,7 +53,7 @@ export default function MarqueeSection() {
           }}
         >
           <p className="text-white font-semibold text-sm">
-            Trusted By {COMPANY_DATA.total}+ Companies
+            Trusted By These Companies
           </p>
         </div>
       </div>

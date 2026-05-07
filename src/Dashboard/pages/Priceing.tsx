@@ -19,6 +19,9 @@ interface PricingTier {
   description: string;
   options: PlanOption[];
   isFeatured?: boolean;
+  hidePricing?: boolean;
+  buttonText?: string;
+  buttonLink?: string;
 }
 
 const PricingTierCard: React.FC<PricingTier> = ({
@@ -28,14 +31,17 @@ const PricingTierCard: React.FC<PricingTier> = ({
   options,
   isFeatured,
   perSeat,
+  hidePricing,
+  buttonText,
+  buttonLink,
 }) => {
   const [isAnnual, setIsAnnual] = React.useState(false);
+  const navigate = useNavigate();
 
   return (
     <div
-      className={`bg-white rounded-3xl shadow-xl border overflow-hidden ${
-        isFeatured ? "border-[#777CDC]" : "border-gray-100"
-      }`}
+      className={`bg-white rounded-3xl shadow-xl border overflow-hidden ${isFeatured ? "border-[#777CDC]" : "border-gray-100"
+        }`}
     >
       <div className={`pt-10 pb-6 px-8 text-center bg-main text-white`}>
         <h3 className="text-2xl font-black mb-1">{title}</h3>
@@ -43,47 +49,46 @@ const PricingTierCard: React.FC<PricingTier> = ({
           {seats} {typeof seats === "number" ? "seat" : "seats"}
         </p>
         <p className="text-white/60 text-xs mb-6">{description}</p>
+        {!hidePricing && (
+          <>
+            <div className="flex justify-center bg-white/10 rounded-lg p-1 w-fit mx-auto">
+              <button
+                onClick={() => setIsAnnual(false)}
+                className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${!isAnnual ? "bg-white text-main" : "text-white/70"
+                  }`}
+              >
+                Monthly
+              </button>
+              <button
+                onClick={() => setIsAnnual(true)}
+                className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${isAnnual ? "bg-white text-main" : "text-white/70"
+                  }`}
+              >
+                Annual
+              </button>
+            </div>
 
-        <div className="flex justify-center bg-white/10 rounded-lg p-1 w-fit mx-auto">
-          <button
-            onClick={() => setIsAnnual(false)}
-            className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
-              !isAnnual ? "bg-white text-main" : "text-white/70"
-            }`}
-          >
-            Monthly
-          </button>
-          <button
-            onClick={() => setIsAnnual(true)}
-            className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
-              isAnnual ? "bg-white text-main" : "text-white/70"
-            }`}
-          >
-            Annual
-          </button>
-        </div>
-
-        <div className="text-3xl font-black mt-4">
-          From $
-          {isAnnual
-            ? options
-                .reduce((sum, opt) => {
-                  const base = opt.annual;
-                  const training = opt.addTraining ? opt.addTraining.annual : 0;
-                  return sum + base + training;
-                }, 0)
-                .toFixed(2)
-            : options
-                .reduce((sum, opt) => {
-                  const base = opt.monthly;
-                  const training = opt.addTraining
-                    ? opt.addTraining.monthly
-                    : 0;
-                  return sum + base + training;
-                }, 0)
-                .toFixed(2)}
-          {perSeat ? "/seat" : `/${isAnnual ? "yr" : "mo"}`}
-        </div>
+            <div className="text-3xl font-black mt-4">
+              From $
+              {isAnnual
+                ? (
+                    options[0].annual +
+                    (options[0].addTraining ? options[0].addTraining.annual : 0)
+                  ).toFixed(2)
+                : (
+                    options[0].monthly +
+                    (options[0].addTraining ? options[0].addTraining.monthly : 0)
+                  ).toFixed(2)}
+              {perSeat ? "/seat" : `/${isAnnual ? "yr" : "mo"}`}
+            </div>
+          </>
+        )}
+        {hidePricing && (
+          <div className="h-[104px] flex flex-col items-center justify-center mt-2">
+            <span className="text-2xl font-black text-white">Custom Pricing</span>
+            <span className="text-sm text-white/80 mt-1">Tailored to your needs</span>
+          </div>
+        )}
       </div>
 
       <div className="p-8">
@@ -106,14 +111,16 @@ const PricingTierCard: React.FC<PricingTier> = ({
                     {option.name}
                   </span>
 
-                  <div className="text-right">
-                    <span className="text-xl font-black text-main">
-                      ${total}
-                    </span>
-                    <span className="text-xs text-gray-500">
-                      {perSeat ? "/seat" : `/${isAnnual ? "yr" : "mo"}`}
-                    </span>
-                  </div>
+                  {!hidePricing && (
+                    <div className="text-right">
+                      <span className="text-xl font-black text-main">
+                        ${total}
+                      </span>
+                      <span className="text-xs text-gray-500">
+                        {perSeat ? "/seat" : `/${isAnnual ? "yr" : "mo"}`}
+                      </span>
+                    </div>
+                  )}
                 </div>
                 {/* 
                 {option.addTraining && (
@@ -144,9 +151,18 @@ const PricingTierCard: React.FC<PricingTier> = ({
           </div>
 
           <button
+            onClick={() => {
+              if (buttonLink) {
+                if (buttonLink.startsWith('mailto:')) {
+                  window.location.href = buttonLink;
+                } else {
+                  navigate(buttonLink);
+                }
+              }
+            }}
             className={`w-full py-4 rounded-xl font-bold transition-all bg-main text-white hover:bg-main/90 hover:cursor-pointer`}
           >
-            {isFeatured ? "Upgrade Now" : "Get Started"}
+            {buttonText || (isFeatured ? "Upgrade Now" : "Get Started")}
           </button>
         </div>
       </div>
@@ -173,7 +189,7 @@ const PricingPlans: React.FC = () => {
           },
         },
         {
-          name: "HR & TA Agent",
+          name: "Both Agents",
           monthly: 59,
           annual: 590,
           addTraining: {
@@ -204,7 +220,7 @@ const PricingPlans: React.FC = () => {
           },
         },
         {
-          name: "HR & TA Agent",
+          name: "Both Agents",
           monthly: 275,
           annual: 2750,
           addTraining: {
@@ -224,6 +240,9 @@ const PricingPlans: React.FC = () => {
       seats: "6+",
       perSeat: true,
       description: "Best for large organizations",
+      hidePricing: true,
+      buttonText: "Contact us for Pricing",
+      buttonLink: "mailto:info@peopleorbitai.com",
       options: [
         {
           name: "Either HR or TA Agent",
@@ -235,7 +254,7 @@ const PricingPlans: React.FC = () => {
           },
         },
         {
-          name: "HR & TA Agent",
+          name: "Both Agents",
           monthly: 49,
           annual: 490,
           addTraining: {

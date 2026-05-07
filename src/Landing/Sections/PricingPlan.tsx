@@ -15,6 +15,9 @@ interface PricingTier {
   seats: string;
   description: string;
   options: PlanOption[];
+  hidePricing?: boolean;
+  buttonText?: string;
+  buttonLink?: string;
 }
 
 const PricingTierCard: React.FC<PricingTier> = ({
@@ -22,6 +25,9 @@ const PricingTierCard: React.FC<PricingTier> = ({
   seats,
   description,
   options,
+  hidePricing,
+  buttonText,
+  buttonLink,
 }) => {
   const [isAnnual, setIsAnnual] = React.useState(false);
   const navigate = useNavigate();
@@ -32,47 +38,49 @@ const PricingTierCard: React.FC<PricingTier> = ({
         <h3 className="text-2xl font-black mb-1">{title}</h3>
         <p className="text-white/80 text-sm mb-4">{seats}</p>
         <p className="text-white/60 text-xs mb-6">{description}</p>
-        <div className="flex justify-center bg-white/10 rounded-lg p-1 w-fit mx-auto">
-          <button
-            onClick={() => setIsAnnual(false)}
-            className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
-              !isAnnual ? "bg-white text-[#777CDC]" : "text-white/70"
-            }`}
-          >
-            Monthly
-          </button>
-          <button
-            onClick={() => setIsAnnual(true)}
-            className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${
-              isAnnual ? "bg-white text-[#777CDC]" : "text-white/70"
-            }`}
-          >
-            Annual
-          </button>
-        </div>
-        <div className="text-3xl font-black mt-4">
-          From $
-          {isAnnual
-            ? options
-                .reduce((sum, opt) => {
-                  const base = parseFloat(opt.annual.replace(/,/g, ""));
-                  const training = opt.addTrainingAnnual
-                    ? parseFloat(opt.addTrainingAnnual.replace(/,/g, ""))
-                    : 0;
-                  return sum + base + training;
-                }, 0)
-                .toFixed(2)
-            : options
-                .reduce((sum, opt) => {
-                  const base = parseFloat(opt.monthly);
-                  const training = opt.addTrainingMonthly
-                    ? parseFloat(opt.addTrainingMonthly)
-                    : 0;
-                  return sum + base + training;
-                }, 0)
-                .toFixed(2)}
-          /{isAnnual ? "yr" : "mo"}
-        </div>
+        {!hidePricing && (
+          <>
+            <div className="flex justify-center bg-white/10 rounded-lg p-1 w-fit mx-auto">
+              <button
+                onClick={() => setIsAnnual(false)}
+                className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${!isAnnual ? "bg-white text-[#777CDC]" : "text-white/70"
+                  }`}
+              >
+                Monthly
+              </button>
+              <button
+                onClick={() => setIsAnnual(true)}
+                className={`px-4 py-1.5 rounded-md text-sm font-medium transition-all ${isAnnual ? "bg-white text-[#777CDC]" : "text-white/70"
+                  }`}
+              >
+                Annual
+              </button>
+            </div>
+            <div className="text-3xl font-black mt-4">
+              From $
+              {isAnnual
+                ? (
+                  parseFloat(options[0].annual.replace(/,/g, "")) +
+                  (options[0].addTrainingAnnual
+                    ? parseFloat(options[0].addTrainingAnnual.replace(/,/g, ""))
+                    : 0)
+                ).toFixed(2)
+                : (
+                  parseFloat(options[0].monthly) +
+                  (options[0].addTrainingMonthly
+                    ? parseFloat(options[0].addTrainingMonthly)
+                    : 0)
+                ).toFixed(2)}
+              /{isAnnual ? "yr" : "mo"}
+            </div>
+          </>
+        )}
+        {hidePricing && (
+          <div className="h-[104px] flex flex-col items-center justify-center mt-2">
+            <span className="text-2xl font-black text-white">Custom Pricing</span>
+            <span className="text-sm text-white/80 mt-1">Tailored to your needs</span>
+          </div>
+        )}
       </div>
 
       <div className="p-8">
@@ -96,14 +104,16 @@ const PricingTierCard: React.FC<PricingTier> = ({
                   <span className="font-bold text-[#464E5F]">
                     {option.name}
                   </span>
-                  <div className="text-right">
-                    <span className="text-xl font-black text-[#777CDC]">
-                      ${total}
-                    </span>
-                    <span className="text-xs text-gray-500">
-                      /{isAnnual ? "yr" : "mo"}
-                    </span>
-                  </div>
+                  {!hidePricing && (
+                    <div className="text-right">
+                      <span className="text-xl font-black text-[#777CDC]">
+                        ${total}
+                      </span>
+                      <span className="text-xs text-gray-500">
+                        /{isAnnual ? "yr" : "mo"}
+                      </span>
+                    </div>
+                  )}
                 </div>
                 {/* {option.addTrainingMonthly && (
                   <div className="text-xs text-gray-500 flex items-center gap-1">
@@ -128,11 +138,19 @@ const PricingTierCard: React.FC<PricingTier> = ({
           </div>
           <button
             onClick={() => {
-              navigate("/auth/signup");
+              if (buttonLink) {
+                if (buttonLink.startsWith('mailto:')) {
+                  window.location.href = buttonLink;
+                } else {
+                  navigate(buttonLink);
+                }
+              } else {
+                navigate("/auth/signup");
+              }
             }}
-            className="w-full py-4 rounded-2xl font-bold bg-[#8A7DE6] text-white hover:bg-[#6366f1] transition-all"
+            className="w-full py-4 hover:cursor-pointer rounded-2xl font-bold bg-[#8A7DE6] text-white hover:bg-[#6366f1] transition-all"
           >
-            Get Started
+            {buttonText || "Get Started"}
           </button>
         </div>
       </div>
@@ -155,7 +173,7 @@ export const PricingPlans: React.FC = () => {
           addTrainingAnnual: "99.50",
         },
         {
-          name: "HR & TA agent",
+          name: "Both Agents",
           monthly: "59",
           annual: "590",
           addTrainingMonthly: "9.95",
@@ -177,7 +195,7 @@ export const PricingPlans: React.FC = () => {
           addTrainingAnnual: "399.50",
         },
         {
-          name: "HR & TA agent",
+          name: "Both Agents",
           monthly: "275",
           annual: "2,750",
           addTrainingMonthly: "39.95",
@@ -190,6 +208,9 @@ export const PricingPlans: React.FC = () => {
       title: "Enterprise+",
       seats: "(6+ seats)",
       description: "Best for large organizations",
+      hidePricing: true,
+      buttonText: "Contact us for Pricing",
+      buttonLink: "mailto:info@peopleorbitai.com",
       options: [
         {
           name: "Either HR or TA agent",
@@ -199,7 +220,7 @@ export const PricingPlans: React.FC = () => {
           addTrainingAnnual: "89.50",
         },
         {
-          name: "HR & TA agent",
+          name: "Both Agents",
           monthly: "49",
           annual: "490",
           addTrainingMonthly: "8.95",
@@ -225,7 +246,7 @@ export const PricingPlans: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {tiers.map((tier, idx) => (
-            <PricingTierCard key={idx} {...tier} />
+            <PricingTierCard key={idx} {...tier} buttonLink="mailto:info@peopleorbitai.com" />
           ))}
         </div>
 

@@ -16,9 +16,8 @@ const FAQItem: React.FC<FAQItemProps> = ({
 }) => {
   return (
     <div
-      className={`group border-b border-gray-100 bg-white transition-all duration-300 rounded-2xl  ${
-        isOpen ? "bg-slate-50/50 rounded-2xl px-6" : "px-2"
-      }`}
+      className={`group border-b border-gray-100 bg-white transition-all duration-300 rounded-2xl  ${isOpen ? "bg-slate-50/50 rounded-2xl px-6" : "px-2"
+        }`}
     >
       <button
         onClick={onToggle}
@@ -26,26 +25,23 @@ const FAQItem: React.FC<FAQItemProps> = ({
         aria-expanded={isOpen}
       >
         <span
-          className={`text-lg md:text-xl font-bold transition-colors duration-300 ${
-            isOpen ? "text-[#818cf8]" : "text-title-2nd  px-3"
-          }`}
+          className={`text-lg md:text-xl font-bold transition-colors duration-300 ${isOpen ? "text-[#818cf8]" : "text-title-2nd  px-3"
+            }`}
         >
           {question}
         </span>
         <div
-          className={`shrink-0 ml-4 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
-            isOpen
-              ? "bg-[#818cf8] text-white rotate-180"
-              : "bg-slate-100 text-slate-400"
-          }`}
+          className={`shrink-0 ml-4 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${isOpen
+            ? "bg-[#818cf8] text-white rotate-180"
+            : "bg-slate-100 text-slate-400"
+            }`}
         >
           {isOpen ? <Minus size={18} /> : <Plus size={18} />}
         </div>
       </button>
       <div
-        className={`overflow-hidden transition-all duration-300 ease-in-out ${
-          isOpen ? "max-h-96 opacity-100 pb-8" : "max-h-0 opacity-0"
-        }`}
+        className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-96 opacity-100 pb-8" : "max-h-0 opacity-0"
+          }`}
       >
         <p className="text-gray-500 leading-relaxed text-base md:text-lg max-w-2xl">
           {answer}
@@ -167,8 +163,10 @@ export const FAQSection: React.FC = () => {
         {/* Bottom CTA */}
         <div className="mt-20 text-center">
           <p className="text-slate-500 mb-6">Still have questions?</p>
-          <button className="px-8 py-4 bg-[#1a1a2e] text-white font-bold rounded-full hover:bg-indigo-600 transition-colors shadow-lg active:scale-95">
-            Contact Support
+          <button onClick={() => {
+            window.location.href = "mailto:info@peopleorbitai.com"
+          }} className="px-8 py-4 bg-[#1a1a2e] hover:cursor-pointer text-white font-bold rounded-full hover:bg-indigo-600 transition-colors shadow-lg active:scale-95">
+            Contact Us
           </button>
         </div>
       </div>

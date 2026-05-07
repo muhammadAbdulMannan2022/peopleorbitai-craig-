@@ -21,16 +21,15 @@ export default function Layout() {
             <img className="h-10" src="/logo.png" alt="" />
           </div>
           <img
-            src="/auth.jpg"
+            src="/authimg.jpeg"
             alt="Auth illustration"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover "
           />
           <div className="absolute bottom-0 left-10 right-10 z-10 px-6 bg-black/30 backdrop-blur-md py-6 rounded-t-full text-center flex flex-col items-center justify-center text-white border border-white/10">
             <h1 className="text-2xl font-bold mb-2">AI Agent</h1>
             <p className="text-sm opacity-90 leading-relaxed max-w-[70%]">
-              Empowering hotels and restaurants with AI-driven solutions to
-              enhance guest experiences and streamline digital services. Sign in
-              to manage your business and connect with customers effortlessly.
+              Nell & Finn – your AI Agents Helping you replace the time wasted
+              on repetitive and boring admin tasks.
             </p>
           </div>
         </div>
