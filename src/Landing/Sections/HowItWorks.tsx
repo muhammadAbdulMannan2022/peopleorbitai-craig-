@@ -17,7 +17,6 @@ const StepCard: React.FC<StepCardProps> = ({ step, title, description }) => (
     </span>
     <h3 className="text-[#1a1a2e] font-extrabold text-2xl mb-4">{title}</h3>
     <p className="text-gray-500 leading-relaxed text-base">{description}</p>
-    <img src="/comingsoon.png" className="absolute top-5 right-5 w-32" alt="" />
   </div>
 );
 
@@ -44,7 +43,7 @@ export const HowItWorks: React.FC = () => {
     <section className="py-24 px-4 md:px-16 bg-[#fafafa]">
       <div className="max-w-7xl mx-auto text-center">
         {/* Header */}
-        <div className="mb-20">
+        <div className="mb-20 flex flex-col items-center justify-center">
           <span className="text-[#6d28d9] font-semibold text-sm tracking-widest uppercase mb-4 block">
             Our Agents
           </span>
@@ -54,6 +53,7 @@ export const HowItWorks: React.FC = () => {
           <p className="text-gray-500 text-lg max-w-xl mx-auto px-4">
             Choose or combine your solutions
           </p>
+          <img src="/comingsoon.png" className="w-32 md:w-40 mt-5" alt="" />
         </div>
 
         {/* Process Timeline */}

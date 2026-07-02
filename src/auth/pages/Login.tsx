@@ -1,19 +1,59 @@
 import React, { useState } from "react";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { Link, useNavigate } from "react-router";
+import { useLoginMutation } from "../../store/apiSlice";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const navigate = useNavigate();
+  const [login, { isLoading }] = useLoginMutation();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    navigate("/");
+    setErrorMsg("");
+    try {
+      const response = await login({ email, password }).unwrap();
+      if (response.success) {
+        navigate("/dashboard");
+      } else {
+        setErrorMsg(response.message || "Login failed");
+      }
+    } catch (err: any) {
+      console.error(err);
+      setErrorMsg(
+        err.data?.errors?.message ||
+          err.data?.message ||
+          "Invalid email or password",
+      );
+    }
   };
+
   return (
-    <div className="text-center">
+    <>
+      {errorMsg && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm px-4">
+          <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full text-center transform transition-all">
+            <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span className="text-red-500 text-3xl font-bold">!</span>
+            </div>
+            <h3 className="text-xl font-bold text-slate-800 mb-2">
+              Login Failed
+            </h3>
+            <p className="text-slate-500 mb-6 font-medium">{errorMsg}</p>
+            <button
+              onClick={() => setErrorMsg("")}
+              className="w-full py-3 bg-authThem hover:bg-[#7c74ed] text-white rounded-xl font-bold text-base transition-colors hover:cursor-pointer"
+            >
+              Try Again
+            </button>
+          </div>
+        </div>
+      )}
+
+      <div className="text-center">
         {/* Welcome Text */}
         <h1 className="text-4xl md:text-5xl font-black text-[#2d3748] mb-8 md:mb-12 tracking-tight">
           Welcome <span className="text-title-2nd">back</span>
@@ -80,9 +120,10 @@ export default function Login() {
           {/* Sign In Button */}
           <button
             type="submit"
-            className="w-full py-5 bg-authThem hover:cursor-pointer hover:bg-[#7c74ed] text-white rounded-xl font-bold text-lg shadow-xl shadow-indigo-100 active:scale-[0.98] transition-all mb-6"
+            disabled={isLoading}
+            className="w-full py-5 bg-authThem hover:cursor-pointer hover:bg-[#7c74ed] text-white rounded-xl font-bold text-lg shadow-xl shadow-indigo-100 active:scale-[0.98] transition-all mb-6 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Sign In
+            {isLoading ? "Signing In..." : "Sign In"}
           </button>
 
           <div className="flex items-center justify-center gap-2 mb-6">
@@ -119,6 +160,7 @@ export default function Login() {
             Google
           </button>
         </form>
-    </div>
+      </div>
+    </>
   );
 }

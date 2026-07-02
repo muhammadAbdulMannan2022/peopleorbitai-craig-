@@ -1,13 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router";
+import { useVerifyOtpMutation } from "../../store/apiSlice";
 
 export default function OTP() {
-  const [otp, setOtp] = useState<string[]>(["", "", "", ""]);
+  const [otp, setOtp] = useState<string[]>(["", "", "", "", "", ""]);
   const [error, setError] = useState("");
   const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
   const navigate = useNavigate();
   const location = useLocation();
+  const [verifyOtp, { isLoading }] = useVerifyOtpMutation();
   const email = location.state?.email || "your email";
+  const fromFlow = location.state?.from || "signup"; // 'signup' or 'forgot'
 
   // Auto focus first input
   useEffect(() => {
@@ -22,7 +25,7 @@ export default function OTP() {
     setOtp(newOtp);
     setError("");
 
-    if (value && index < 3) {
+    if (value && index < 5) {
       inputsRef.current[index + 1]?.focus();
     }
   };
@@ -41,35 +44,46 @@ export default function OTP() {
     const pasted = e.clipboardData
       .getData("text")
       .replace(/\D/g, "")
-      .slice(0, 4);
+      .slice(0, 6);
 
     if (!pasted) return;
 
     const newOtp = pasted.split("");
-    while (newOtp.length < 4) newOtp.push("");
+    while (newOtp.length < 6) newOtp.push("");
 
     setOtp(newOtp);
     setError("");
-    inputsRef.current[Math.min(pasted.length - 1, 3)]?.focus();
+    inputsRef.current[Math.min(pasted.length - 1, 5)]?.focus();
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (otp.some((d) => !d)) {
-      setError("Enter all 4 digits");
+      setError("Enter all 6 digits");
       return;
     }
 
     const code = otp.join("");
-    console.log("OTP:", code);
+    const purpose = fromFlow === "forgot" ? "forgot_password" : "signup";
 
-    // If we came from forgot password flow, go to change password
-    if (location.state?.from === 'forgot') {
-      navigate("/auth/change-password");
-    } else {
-      // Signup flow: go to login
-      navigate("/auth/login");
+    try {
+      const response = await verifyOtp({ email, otp: code, purpose }).unwrap();
+      if (purpose === "forgot_password") {
+        // Save the reset token and email for the change password view
+        navigate("/auth/change-password", { 
+          state: { 
+            email, 
+            resetToken: response.data.reset_token 
+          } 
+        });
+      } else {
+        // Signup verification directly signs user in and sets cookies
+        navigate("/dashboard");
+      }
+    } catch (err: any) {
+      console.error(err);
+      setError(err.data?.errors?.message || err.data?.message || "Invalid OTP code. Please try again.");
     }
   };
 
@@ -80,12 +94,12 @@ export default function OTP() {
         Verify OTP
       </h1>
       <p className="text-slate-400 text-sm mb-12">
-        Enter the 4-digit code sent to <span className="text-authThem font-bold">{email}</span>
+        Enter the 6-digit code sent to <span className="text-authThem font-bold">{email}</span>
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-10">
         {/* OTP Inputs */}
-        <div className="flex justify-center gap-4">
+        <div className="flex justify-center gap-3">
           {otp.map((digit, idx) => (
             <input
               key={idx}
@@ -98,8 +112,8 @@ export default function OTP() {
               onKeyDown={(e) => handleKeyDown(e, idx)}
               onPaste={handlePaste}
               placeholder="0"
-              className={`w-16 h-16 text-2xl font-black text-center rounded-2xl
-                border shadow-lg transition-all outline-none
+              className={`w-12 h-12 text-xl font-black text-center rounded-xl
+                border shadow-md transition-all outline-none
                 focus:ring-4 focus:ring-authThem/20
                 ${
                   digit ? "border-authThem bg-authThem/5" : "border-authThem/40"
@@ -115,14 +129,14 @@ export default function OTP() {
         {/* Submit */}
         <button
           type="submit"
-          disabled={otp.some((d) => !d)}
+          disabled={otp.some((d) => !d) || isLoading}
           className="w-full py-5 bg-authThem hover:bg-[#7c74ed]
           text-white rounded-xl font-bold text-lg
           shadow-xl shadow-indigo-100
           active:scale-[0.98] transition-all
           disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          Confirm
+          {isLoading ? "Verifying..." : "Confirm"}
         </button>
 
         {/* Resend */}

@@ -194,7 +194,7 @@ export default function Sidebar({
 
             {/* chat section */}
             <div className="flex-1 overflow-y-auto  hide-scrollbar relative mt-3">
-              <SidebarChatList />
+              <SidebarChatList activeAgentId={activeAgentId} />
             </div>
           </div>
         )}

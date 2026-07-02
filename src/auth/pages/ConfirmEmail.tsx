@@ -1,16 +1,26 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { Mail } from "lucide-react";
+import { useForgotPasswordMutation } from "../../store/apiSlice";
 
 export default function ConfirmEmail() {
   const [email, setEmail] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
   const navigate = useNavigate();
+  const [forgotPassword, { isLoading }] = useForgotPasswordMutation();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMsg("");
     console.log("Confirm email:", email);
-    // send OTP / confirmation email here
-    navigate("/auth/otp", { state: { email, from: 'forgot' } });
+    
+    try {
+      await forgotPassword({ email }).unwrap();
+      navigate("/auth/otp", { state: { email, from: 'forgot' } });
+    } catch (err: any) {
+      console.error(err);
+      setErrorMsg(err.data?.errors?.message || err.data?.message || "Failed to send reset code. Please try again.");
+    }
   };
 
   return (
@@ -22,9 +32,15 @@ export default function ConfirmEmail() {
         </h1>
 
         {/* Subtitle */}
-        <p className="text-slate-400 text-sm md:text-base mb-14">
+        <p className="text-slate-400 text-sm md:text-base mb-10">
           Enter your email address and we’ll send you a verification code
         </p>
+
+        {errorMsg && (
+          <div className="mb-4 p-3 bg-red-100 border border-red-200 text-red-700 rounded-lg text-sm font-medium text-left">
+            {errorMsg}
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="text-left">
           {/* Email */}
@@ -53,12 +69,13 @@ export default function ConfirmEmail() {
           {/* Submit */}
           <button
             type="submit"
+            disabled={isLoading}
             className="w-full py-5 bg-authThem hover:bg-[#7c74ed]
             text-white rounded-xl font-bold text-lg
             shadow-xl shadow-indigo-100
-            active:scale-[0.98] transition-all"
+            active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Send Code
+            {isLoading ? "Sending..." : "Send Code"}
           </button>
         </form>
       </div>

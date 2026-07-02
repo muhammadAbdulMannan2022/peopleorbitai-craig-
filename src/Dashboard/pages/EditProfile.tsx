@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { ChevronLeft, Phone, Mail } from "lucide-react";
 import type { ProfileData } from "./Profile";
 
 interface EditProfileProps {
   data: ProfileData;
-  onSave: (updatedData: ProfileData) => void;
+  onSave: (updatedData: ProfileData, file: File | null) => void;
   onCancel: () => void;
 }
 
@@ -14,6 +14,7 @@ const EditProfile: React.FC<EditProfileProps> = ({
   onCancel,
 }) => {
   const [formData, setFormData] = React.useState<ProfileData>(data);
+  const [avatarFile, setAvatarFile] = useState<File | null>(null);
 
   const handleChange = (field: string, value: string) => {
     setFormData((prev: any) => ({ ...prev, [field]: value }));
@@ -24,6 +25,17 @@ const EditProfile: React.FC<EditProfileProps> = ({
       ...prev,
       address: { ...prev.address, [field]: value },
     }));
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      setAvatarFile(file);
+      setFormData((prev) => ({
+        ...prev,
+        avatar: URL.createObjectURL(file),
+      }));
+    }
   };
 
   const InputField = ({
@@ -129,10 +141,15 @@ const EditProfile: React.FC<EditProfileProps> = ({
           <div className="flex items-center w-full bg-[#F3F6F9] rounded-lg overflow-hidden border border-transparent focus-within:ring-1 focus-within:ring-[#8B7EF0]">
             <label className="bg-[#E1E9F1] text-[#464E5F] px-4 py-3 text-sm font-medium cursor-pointer hover:bg-[#D4DEE9] transition-colors">
               Choose file
-              <input type="file" className="hidden" />
+              <input
+                type="file"
+                className="hidden"
+                accept="image/*"
+                onChange={handleFileChange}
+              />
             </label>
             <span className="flex-1 px-4 text-[#8E99AF] text-xs truncate">
-              a:sdjlkgjadslg;lasd.jpg
+              {avatarFile ? avatarFile.name : (formData.avatar?.split('/').pop() || "No file selected")}
             </span>
           </div>
         </div>
@@ -184,8 +201,8 @@ const EditProfile: React.FC<EditProfileProps> = ({
 
       <div className="flex justify-center mt-12">
         <button
-          onClick={() => onSave(formData)}
-          className="bg-dashboardMain hover:bg-dashboardMain/90 hover:cursor-pointer text-white font-bold py-4 px-16 rounded-xl transition-all shadow-lg shadow-[#8B7EF033] text-lg"
+          onClick={() => onSave(formData, avatarFile)}
+          className="bg-[#8B7EF0] hover:bg-[#7c70e2] hover:cursor-pointer text-white font-bold py-4 px-16 rounded-xl transition-all shadow-lg shadow-[#8B7EF033] text-lg"
         >
           Save changes
         </button>

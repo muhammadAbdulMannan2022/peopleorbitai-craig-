@@ -20,10 +20,10 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
       <img src={icon} alt={title} />
     </div>
     <div className="flex flex-col text-center md:text-left">
-      <h3 className="text-title-2nd font-extrabold text-2xl mb-3 opacity-90">
+      <h3 className="text-title-2nd font-extrabold text-lg lg:text-2xl mb-3 opacity-90">
         {title}
       </h3>
-      <p className="text-gray-400 leading-relaxed text-lg max-w-2xl">
+      <p className="text-gray-400 leading-relaxed text-base lg:text-lg max-w-2xl">
         {description}
       </p>
     </div>
@@ -60,7 +60,6 @@ export const WhyChooseUs: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-16 md:mb-20">
-
           <h2 className="text-6xl md:text-7xl font-black text-title-2nd mb-6 tracking-tight">
             Why Choose Us
           </h2>
@@ -86,7 +85,7 @@ export const WhyChooseUs: React.FC = () => {
             <img
               src="/hwimg.png"
               alt="why us"
-              className="w-full h-auto md:w-[80%]"
+              className="w-full lg:w-[80%] h-auto object-contain"
             />
           </div>
         </div>

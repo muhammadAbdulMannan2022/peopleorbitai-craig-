@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Lock, Eye, EyeOff } from "lucide-react";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
+import { useResetPasswordMutation } from "../../store/apiSlice";
 
 export default function ChangePassword() {
   const [password, setPassword] = useState("");
@@ -9,12 +10,16 @@ export default function ChangePassword() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const [resetPassword, { isLoading }] = useResetPasswordMutation();
+  
+  const resetToken = location.state?.resetToken;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (password.length < 6) {
-      setError("Password must be at least 6 characters");
+    if (password.length < 8) {
+      setError("Password must be at least 8 characters");
       return;
     }
 
@@ -23,10 +28,21 @@ export default function ChangePassword() {
       return;
     }
 
+    if (!resetToken) {
+      setError("Reset token is missing. Please verify your email first.");
+      return;
+    }
+
     setError("");
     console.log("New password:", password);
-    // submit new password here
-    navigate("/auth/login");
+    
+    try {
+      await resetPassword({ reset_token: resetToken, new_password: password }).unwrap();
+      navigate("/auth/login");
+    } catch (err: any) {
+      console.error(err);
+      setError(err.data?.errors?.message || err.data?.message || "Failed to update password. Please try again.");
+    }
   };
 
   return (
@@ -38,7 +54,7 @@ export default function ChangePassword() {
         </h1>
 
         {/* Subtitle */}
-        <p className="text-slate-400 text-sm md:text-base mb-14">
+        <p className="text-slate-400 text-sm md:text-base mb-10">
           Create a new password for your account
         </p>
 
@@ -111,12 +127,13 @@ export default function ChangePassword() {
           {/* Submit */}
           <button
             type="submit"
+            disabled={isLoading}
             className="w-full py-5 bg-authThem hover:bg-[#7c74ed]
             text-white rounded-xl font-bold text-lg
             shadow-xl shadow-indigo-100
-            active:scale-[0.98] transition-all"
+            active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Update Password
+            {isLoading ? "Updating..." : "Update Password"}
           </button>
         </form>
       </div>

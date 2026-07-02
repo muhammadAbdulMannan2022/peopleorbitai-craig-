@@ -3,12 +3,12 @@ import Navbar from "./Navbar";
 
 export default function Hero() {
   return (
-    <div className="bg-[url('/heroBg.svg')] w-full h-screen bg-no-repeat bg-cover flex flex-col">
+    <div className="bg-[url('/heroBg.svg')] w-full md:h-screen bg-no-repeat bg-cover flex flex-col">
       {/* ----- Navbar (fixed height) ----- */}
       <Navbar />
 
       {/* ----- The rest of the screen ----- */}
-      <div className="flex-1 flex items-center justify-center overflow-x-hidden px-5 md:px-10">
+      <div className="flex-1 flex items-center justify-center overflow-x-hidden px-5 md:px-10 pt-20 md:pt-0">
         <div className="max-w-7xl w-full flex flex-col-reverse md:flex-row justify-start  md:justify-between gap-8 px-5 md:px-0 py-8 md:py-10 h-full ">
           {/* ----- Left column (text + CTA) ----- */}
           <div className="flex flex-col justify-center space-y-6  w-full md:w-1/2 ">
@@ -51,11 +51,6 @@ export default function Hero() {
                 TA & HR function for the realities of AI, adding real value to
                 your business and your function.
               </p>
-              <img
-                src="/comingsoon.png"
-                className="w-32 md:w-40 absolute right-0"
-                alt=""
-              />
             </div>
 
             <button
@@ -72,11 +67,16 @@ export default function Hero() {
           </div>
 
           {/* ----- Right column (hero image) ----- */}
-          <div className="flex items-center md:justify-end  w-full md:w-1/2 ">
+          <div className="flex items-center md:justify-end  w-full md:w-1/2 relative">
             <img
               src="/heroImg2.png"
               alt="Hero illustration"
               className="max-w-full w-full h-auto md:-mr-12"
+            />
+            <img
+              src="/comingsoon.png"
+              className="w-32 md:w-52 absolute right-10 "
+              alt=""
             />
           </div>
         </div>
