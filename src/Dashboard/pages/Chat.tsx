@@ -1,11 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSearchParams, useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
 import MessageBox from "./MessageInput";
 import MessageDisplay from "./Messages";
 import { 
   useGetChatMessagesQuery, 
   useSendMessageMutation,
-  useGeneratePresignedUrlsMutation
+  useGeneratePresignedUrlsMutation,
+  apiSlice
 } from "../../store/apiSlice";
 
 export interface Message {
@@ -19,14 +21,21 @@ export default function Chat() {
   const assignmentId = searchParams.get("assignmentId");
   const chatId = searchParams.get("chatId");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [message, setMessage] = useState<string>("");
   const [files, setFiles] = useState<File[]>([]);
   const [isTyping, setIsTyping] = useState(false);
   const [streamedText, setStreamedText] = useState<string>("");
 
+  const justCreatedChatRef = useRef(false);
+
   // Reset typing state and streamed text when active chat changes
   useEffect(() => {
+    if (justCreatedChatRef.current) {
+      justCreatedChatRef.current = false;
+      return;
+    }
     setIsTyping(false);
     setStreamedText("");
   }, [chatId]);
@@ -44,8 +53,17 @@ export default function Chat() {
       }
       // If we receive stream chunks
       else if (wsMessage.type === 'AI_RESPONSE_CHUNK' && wsMessage.data?.chat_id === chatId) {
-        setIsTyping(false);
-        setStreamedText((prev) => prev + (wsMessage.data?.content || ""));
+        const chunkContent = wsMessage.data?.content || "";
+        if (chunkContent === '[START]') {
+          setStreamedText("");
+        } else if (chunkContent === '[END]') {
+          setIsTyping(false);
+          setStreamedText("");
+          // Refetch messages query to show the updated DB messages list
+          dispatch(apiSlice.util.invalidateTags(['Message']));
+        } else {
+          setStreamedText((prev) => prev + chunkContent);
+        }
       }
       // If the AI response completes or ends for our active chat
       else if (
@@ -136,6 +154,7 @@ export default function Chat() {
       }
 
       // Step 2: Send Message to Backend
+      const agentType = searchParams.get("agentType") || "recruitment";
       const res = await sendMessage({
         chat_id: chatId || undefined, // undefined will auto-create a new chat
         content: message,
@@ -143,13 +162,15 @@ export default function Chat() {
         title: message.substring(0, 30),
         assignment_id: assignmentId || undefined,
         attachment_s3_paths: attachmentS3Paths,
+        agent_type: agentType,
       }).unwrap();
 
       setMessage("");
       setFiles([]);
 
       if (!chatId && res?.data?.chat_id) {
-        navigate(`/dashboard/chat?assignmentId=${assignmentId}&chatId=${res.data.chat_id}`);
+        justCreatedChatRef.current = true;
+        navigate(`/dashboard/chat?assignmentId=${assignmentId}&chatId=${res.data.chat_id}&agentType=${agentType}`);
       }
     } catch (err) {
       console.error("Failed to send message:", err);

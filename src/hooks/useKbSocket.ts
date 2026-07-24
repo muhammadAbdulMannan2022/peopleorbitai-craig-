@@ -8,8 +8,11 @@ export function useKbSocket(userId: number | undefined) {
   useEffect(() => {
     if (!userId) return;
 
-    // Connect to WebSocket server directly
-    const socketUrl = `ws://localhost:4001/chats/ws?userId=${userId}`;
+    // Connect to WebSocket server via nginx proxy path
+    const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080';
+    const wsProtocol = apiBase.startsWith('https') ? 'wss' : 'ws';
+    const wsHost = apiBase.replace(/^https?:\/\//, '');
+    const socketUrl = `${wsProtocol}://${wsHost}/ws?userId=${userId}`;
     console.log(`[WS] Connecting to ${socketUrl}`);
     const socket = new WebSocket(socketUrl);
 

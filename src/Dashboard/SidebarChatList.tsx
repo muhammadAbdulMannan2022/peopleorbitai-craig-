@@ -600,8 +600,16 @@ export default function SidebarChatList({
     null,
   );
 
+  // Reset active assignment and chat when agent switches
+  useEffect(() => {
+    setActiveAssignmentId(null);
+    setActiveChatId(null);
+    navigate("/dashboard/chat");
+  }, [activeAgentId]);
+
   // Group and map data
   const assignmentsList = assignmentsRes?.data || [];
+  const currentAgentType = activeAgentId === 2 ? "recruitment" : "hr";
 
   const assignments: Assignment[] = assignmentsList.map((a: any) => ({
     id: a.id,
@@ -613,7 +621,13 @@ export default function SidebarChatList({
   const activeAssignmentFromList = assignments.find(
     (a) => a.id === activeAssignmentId,
   );
-  const activeAssignmentChats = activeAssignmentRes?.data?.chats || [];
+  // Filter chats belonging to the active assignment by the current active agent type (with fallback for legacy records)
+  const activeAssignmentChats = (activeAssignmentRes?.data?.chats || []).filter(
+    (c: any) => {
+      const chatAgentType = c.agent_type || activeAssignmentFromList?.agent_type || "recruitment";
+      return chatAgentType === currentAgentType;
+    }
+  );
 
   const activeAssignment = activeAssignmentFromList
     ? { ...activeAssignmentFromList, chats: activeAssignmentChats }
@@ -636,17 +650,19 @@ export default function SidebarChatList({
       // The chats might not be loaded yet, but we can set the active chat ID
       setActiveChatId(chatId);
     }
-  }, [assignmentId, chatId, assignmentsRes]);
+  }, [assignmentId, chatId, assignmentsList]);
 
   const handleCreateAssignment = async (name: string) => {
     try {
-      // Map activeAgentId: 1 -> HR, 2 -> Recruitment
-      const agentType = activeAgentId === 2 ? "recruitment" : "hr";
-      await createAssignment({
+      // Assignments are no longer agent-specified
+      const res = await createAssignment({
         title: name,
-        agent_type: agentType,
         status: "active",
       }).unwrap();
+      const newId = res?.data?.id || res?.id;
+      if (newId) {
+        setActiveAssignmentId(newId);
+      }
     } catch (err) {
       console.error(err);
       alert("Failed to create assignment");
@@ -659,12 +675,13 @@ export default function SidebarChatList({
       const res = await createChatMutation({
         assignment_id: activeAssignment.id,
         title: `New Chat ${activeAssignment.chats.length + 1}`,
+        agent_type: currentAgentType
       }).unwrap();
 
       if (res.success && res.data?.id) {
         setActiveChatId(res.data.id);
         navigate(
-          `/dashboard/chat?assignmentId=${activeAssignment.id}&chatId=${res.data.id}`,
+          `/dashboard/chat?assignmentId=${activeAssignment.id}&chatId=${res.data.id}&agentType=${currentAgentType}`,
         );
       }
     } catch (err) {
@@ -676,7 +693,7 @@ export default function SidebarChatList({
   const handleActiveChat = (cId: string) => {
     setActiveChatId(cId);
     navigate(
-      `/dashboard/chat?assignmentId=${activeAssignmentId}&chatId=${cId}`,
+      `/dashboard/chat?assignmentId=${activeAssignmentId}&chatId=${cId}&agentType=${currentAgentType}`,
     );
   };
 
